@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Infos & RSVP — Pauline & Damien</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#f7f3ed;
+  --sage:#5a7a5c;--sage-l:#8aaa8c;--sage-ll:#c0d4c0;--sage-p:#eef4ee;
+  --orange:#c85a28;--orange-l:#e07848;--orange-ll:#f5d0b8;--orange-p:#fdf4ee;
+  --gold:#b8882a;--gold-l:#d4a84a;--gold-ll:#f0deb0;
+  --ink:#2c2418;--ink-m:#5a4e3a;--ink-s:#8a7a62;
+  --border:#ddd5c5;
+}
+html{scroll-behavior:smooth}
+body{font-family:'Jost',sans-serif;background:var(--bg);color:var(--ink);min-height:100vh}
+
+nav{display:flex;justify-content:space-between;align-items:center;padding:1rem 3rem;background:var(--bg);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:100}
+.nav-logo{font-family:'Great Vibes',cursive;font-size:1.6rem;color:var(--sage);text-decoration:none}
+.nav-links{display:flex;gap:2rem;list-style:none}
+.nav-links a{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-s);text-decoration:none;transition:color .2s}
+.nav-links a:hover,.nav-links a.active{color:var(--orange)}
+@media(max-width:600px){nav{padding:.85rem 1.5rem}.nav-links{gap:1rem}}
+
+/* PAGE HEADER */
+.page-header{padding:4rem 3rem 3rem;text-align:center;max-width:700px;margin:0 auto}
+@media(max-width:600px){.page-header{padding:2.5rem 1.5rem 2rem}}
+.page-eyebrow{font-size:11px;letter-spacing:.25em;text-transform:uppercase;color:var(--orange);margin-bottom:.5rem}
+.page-title{font-family:'Great Vibes',cursive;font-size:clamp(3rem,6vw,4.5rem);color:var(--sage);line-height:1.15}
+.page-rule{width:40px;height:1px;background:var(--border);margin:1rem auto 0}
+
+/* PALM BANNER */
+.palm-banner{width:100%;overflow:hidden;line-height:0}
+.palm-banner svg{display:block;width:100%}
+
+/* CONTENT */
+.content{max-width:860px;margin:0 auto;padding:3rem 3rem 5rem}
+@media(max-width:700px){.content{padding:2rem 1.5rem 4rem}}
+
+.sec-eyebrow{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--orange);margin-bottom:.35rem}
+.sec-title{font-family:'Great Vibes',cursive;font-size:2.4rem;color:var(--sage);line-height:1.2;margin-bottom:.25rem}
+.sec-rule{width:32px;height:1px;background:var(--border);margin:.6rem 0 2rem}
+
+/* PROGRAMME */
+.programme{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);border:1px solid var(--border);border-radius:8px;overflow:hidden;margin-bottom:3.5rem}
+@media(max-width:580px){.programme{grid-template-columns:1fr}}
+.prog-item{background:var(--bg);padding:1.5rem 1.75rem;display:flex;gap:1.25rem;align-items:flex-start}
+.prog-time{font-family:'Cormorant Garamond',serif;font-size:1.1rem;color:var(--orange);font-weight:300;white-space:nowrap;padding-top:.1rem;min-width:52px}
+.prog-content h3{font-family:'Cormorant Garamond',serif;font-size:1rem;font-weight:400;color:var(--sage);margin-bottom:.2rem;letter-spacing:.03em}
+.prog-content p{font-size:12.5px;color:var(--ink-s);line-height:1.65}
+
+/* LIEU */
+.lieu-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-bottom:3.5rem}
+@media(max-width:580px){.lieu-grid{grid-template-columns:1fr}}
+.lieu-card{background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:1.5rem;border-top:2px solid var(--sage)}
+.lieu-card h3{font-family:'Cormorant Garamond',serif;font-size:1rem;font-weight:400;color:var(--sage);margin-bottom:.5rem;letter-spacing:.04em;text-transform:uppercase;font-size:11px}
+.lieu-card p{font-size:13px;color:var(--ink-m);line-height:1.75}
+.lieu-card a{color:var(--orange);font-size:12px;text-decoration:none;display:inline-block;margin-top:.5rem;letter-spacing:.04em}
+.lieu-card a:hover{text-decoration:underline}
+
+/* HEBERGEMENT */
+.hotel-list{display:flex;flex-direction:column;gap:.75rem;margin-bottom:3.5rem}
+.hotel-card{background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:1.25rem 1.5rem;display:grid;grid-template-columns:1fr auto;align-items:center;gap:1rem}
+@media(max-width:500px){.hotel-card{grid-template-columns:1fr}}
+.hotel-card h3{font-family:'Cormorant Garamond',serif;font-size:.95rem;font-weight:400;color:var(--ink);margin-bottom:.2rem}
+.hotel-card p{font-size:12px;color:var(--ink-s);line-height:1.55}
+.hotel-card a{color:var(--orange);font-size:11.5px;text-decoration:none}
+.badge{font-size:10.5px;padding:3px 10px;border-radius:20px;background:var(--sage-p);color:var(--sage);white-space:nowrap;border:1px solid var(--sage-ll);flex-shrink:0}
+
+/* DRESS CODE */
+.dress-box{background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:1.5rem 1.75rem;margin-bottom:3.5rem;border-left:3px solid var(--orange)}
+.dress-box p{font-size:13.5px;color:var(--ink-m);line-height:1.8}
+
+/* RSVP FORM */
+.rsvp-wrap{background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:2.5rem;border-top:2px solid var(--orange)}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+@media(max-width:500px){.form-grid{grid-template-columns:1fr}}
+.fg{display:flex;flex-direction:column;gap:.35rem;margin-bottom:.9rem}
+.fg label{font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-s)}
+.fg input,.fg select,.fg textarea{padding:.65rem 1rem;border:1px solid var(--border);border-radius:6px;font-size:13px;background:#fff;color:var(--ink);outline:none;font-family:'Jost',sans-serif;width:100%;transition:border-color .2s}
+.fg input:focus,.fg select:focus,.fg textarea:focus{border-color:var(--sage)}
+.fg textarea{resize:vertical;min-height:80px}
+.btn-submit{background:var(--orange);color:#fff;border:none;padding:.85rem 2rem;border-radius:6px;font-size:11px;letter-spacing:.18em;text-transform:uppercase;cursor:pointer;width:100%;font-family:'Jost',sans-serif;margin-top:.5rem;transition:background .2s}
+.btn-submit:hover{background:var(--orange-l)}
+.rsvp-success{display:none;text-align:center;padding:2.5rem 1rem}
+.rsvp-success h3{font-family:'Great Vibes',cursive;font-size:2.5rem;color:var(--sage);margin-bottom:.5rem}
+.rsvp-success p{font-size:13px;color:var(--ink-s)}
+
+footer{text-align:center;padding:2.5rem 2rem;border-top:1px solid var(--border)}
+footer p{font-size:12px;color:var(--ink-s);line-height:1.9}
+.footer-names{font-family:'Great Vibes',cursive;font-size:2rem;color:var(--sage);margin-bottom:.25rem}
+.footer-hr{width:40px;height:1px;background:var(--orange-l);margin:.5rem auto}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">P & D</a>
+  <ul class="nav-links">
+    <li><a href="index.html">Accueil</a></li>
+    <li><a href="infos.html" class="active">Infos & RSVP</a></li>
+    <li><a href="cagnotte.html">Cagnotte</a></li>
+  </ul>
+</nav>
+
+<div class="page-header">
+  <p class="page-eyebrow">12 juillet 2025</p>
+  <h1 class="page-title">Infos & RSVP</h1>
+  <div class="page-rule"></div>
+</div>
+
+<!-- Palm banner -->
+<div class="palm-banner">
+  <svg viewBox="0 0 680 90" xmlns="http://www.w3.org/2000/svg">
+    <rect width="680" height="90" fill="#f7f3ed"/>
+    <g opacity="0.7">
+      <path d="M0 90 Q5 65 15 50 Q22 38 32 30" stroke="#2e4e30" stroke-width="3" fill="none" stroke-linecap="round"/>
+      <path d="M32 30 Q75 5 130 -5" stroke="#3a5a3c" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+      <path d="M32 30 Q20 10 5 -5" stroke="#3a5a3c" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+      <path d="M32 30 Q30 8 28 -10" stroke="#3a5a3c" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+      <path d="M38 22 Q78 5 130 -5" stroke="#3a5a3c" stroke-width="8" fill="none" stroke-linecap="round" opacity="0.38"/>
+      <path d="M26 22 Q12 5 -2 -5" stroke="#3a5a3c" stroke-width="7" fill="none" stroke-linecap="round" opacity="0.38"/>
+      <path d="M30 22 Q28 4 26 -12" stroke="#3a5a3c" stroke-width="7" fill="none" stroke-linecap="round" opacity="0.38"/>
+      <path d="M40 21 Q80 3 130 -5" stroke="#2e4e30" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+      <path d="M27 21 Q13 4 -3 -5" stroke="#2e4e30" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+      <path d="M31 21 Q29 3 27 -12" stroke="#2e4e30" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+    </g>
+    <g opacity="0.7" transform="translate(680,0) scale(-1,1)">
+      <path d="M0 90 Q5 65 15 50 Q22 38 32 30" stroke="#2e4e30" stroke-width="3" fill="none" stroke-linecap="round"/>
+      <path d="M32 30 Q75 5 130 -5" stroke="#3a5a3c" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+      <path d="M32 30 Q20 10 5 -5" stroke="#3a5a3c" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+      <path d="M32 30 Q30 8 28 -10" stroke="#3a5a3c" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+      <path d="M38 22 Q78 5 130 -5" stroke="#3a5a3c" stroke-width="8" fill="none" stroke-linecap="round" opacity="0.38"/>
+      <path d="M26 22 Q12 5 -2 -5" stroke="#3a5a3c" stroke-width="7" fill="none" stroke-linecap="round" opacity="0.38"/>
+      <path d="M30 22 Q28 4 26 -12" stroke="#3a5a3c" stroke-width="7" fill="none" stroke-linecap="round" opacity="0.38"/>
+      <path d="M40 21 Q80 3 130 -5" stroke="#2e4e30" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+      <path d="M27 21 Q13 4 -3 -5" stroke="#2e4e30" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+      <path d="M31 21 Q29 3 27 -12" stroke="#2e4e30" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+    </g>
+    <line x1="0" y1="88" x2="680" y2="88" stroke="#ddd5c5" stroke-width="0.5"/>
+  </svg>
+</div>
+
+<div class="content">
+
+  <!-- PROGRAMME -->
+  <p class="sec-eyebrow">Déroulement</p>
+  <h2 class="sec-title">Programme du jour</h2>
+  <div class="sec-rule"></div>
+  <div class="programme">
+    <div class="prog-item">
+      <div class="prog-time">14h30</div>
+      <div class="prog-content"><h3>Accueil des invités</h3><p>Arrivée au domaine, cocktail de bienvenue dans les jardins</p></div>
+    </div>
+    <div class="prog-item">
+      <div class="prog-time">15h00</div>
+      <div class="prog-content"><h3>Cérémonie laïque</h3><p>Sous la voûte de chênes centenaires du domaine</p></div>
+    </div>
+    <div class="prog-item">
+      <div class="prog-time">16h30</div>
+      <div class="prog-content"><h3>Séance photos</h3><p>Quelques clichés dans le parc avec les mariés</p></div>
+    </div>
+    <div class="prog-item">
+      <div class="prog-time">17h00</div>
+      <div class="prog-content"><h3>Vin d'honneur</h3><p>Terrasse sud du domaine, au bord de l'eau</p></div>
+    </div>
+    <div class="prog-item">
+      <div class="prog-time">19h30</div>
+      <div class="prog-content"><h3>Ouverture du bal</h3><p>Première danse des mariés dans la grande grange</p></div>
+    </div>
+    <div class="prog-item">
+      <div class="prog-time">20h00</div>
+      <div class="prog-content"><h3>Dîner & soirée</h3><p>Repas assis, musique live, feu d'artifice à minuit</p></div>
+    </div>
+  </div>
+
+  <!-- LIEU -->
+  <p class="sec-eyebrow">Où nous retrouver</p>
+  <h2 class="sec-title">Le lieu</h2>
+  <div class="sec-rule"></div>
+  <div class="lieu-grid">
+    <div class="lieu-card">
+      <h3>Adresse</h3>
+      <p>Domaine des Trois Chênes<br>Route de la Forêt<br>84000 Avignon</p>
+      <a href="https://maps.google.com" target="_blank">Voir sur Google Maps →</a>
+    </div>
+    <div class="lieu-card">
+      <h3>Accès & parking</h3>
+      <p>Parking gratuit sur place · 15 min depuis le centre d'Avignon · Navette retour prévue à 00h30 et 02h00</p>
+    </div>
+  </div>
+
+  <!-- HEBERGEMENT -->
+  <p class="sec-eyebrow">Dormir sur place</p>
+  <h2 class="sec-title">Hébergement</h2>
+  <div class="sec-rule"></div>
+  <div class="hotel-list">
+    <div class="hotel-card">
+      <div>
+        <h3>Mas de la Garrigue · 4 étoiles</h3>
+        <p>À 5 min du domaine · Tarif groupe négocié · Code : MARIAGE2025 · <a href="#">Réserver</a></p>
+      </div>
+      <span class="badge">Recommandé</span>
+    </div>
+    <div class="hotel-card">
+      <div>
+        <h3>Camping Les Oliviers · 3 étoiles</h3>
+        <p>À 10 min · Bungalows & tentes glamping · <a href="#">Réserver</a></p>
+      </div>
+      <span class="badge">Bucolique</span>
+    </div>
+    <div class="hotel-card">
+      <div>
+        <h3>Navette domaine ↔ Avignon</h3>
+        <p>Départs à 00h30 et 02h00 · Gratuit · Inscription via le formulaire RSVP ci-dessous</p>
+      </div>
+      <span class="badge">Gratuit</span>
+    </div>
+  </div>
+
+  <!-- DRESS CODE -->
+  <p class="sec-eyebrow">Tenue</p>
+  <h2 class="sec-title">Dress code</h2>
+  <div class="sec-rule"></div>
+  <div class="dress-box">
+    <p><strong style="color:var(--sage)">Bohème chic & tons naturels.</strong> Teintes sauge, terracotta, nude, crème et blanc cassé bienvenues. La cérémonie se déroulant sur pelouse, les talons aiguilles sont déconseillés. Venez à l'aise et dans votre plus beau naturel !</p>
+  </div>
+
+  <!-- RSVP -->
+  <p class="sec-eyebrow">Confirmez votre présence</p>
+  <h2 class="sec-title">RSVP</h2>
+  <div class="sec-rule"></div>
+  <p style="font-size:13px;color:var(--ink-s);margin-bottom:1.5rem">Merci de répondre avant le <strong style="color:var(--ink-m)">15 mai 2025</strong>. Pour toute question : <a href="mailto:mariage@pauline-et-damien.fr" style="color:var(--sage)">mariage@pauline-et-damien.fr</a></p>
+  <div class="rsvp-wrap" id="rsvpWrap">
+    <div class="form-grid" style="margin-bottom:0">
+      <div class="fg"><label>Prénom *</label><input type="text" id="prenom" placeholder="Marie"></div>
+      <div class="fg"><label>Nom *</label><input type="text" id="nom" placeholder="Dupont"></div>
+    </div>
+    <div class="fg"><label>Email *</label><input type="email" id="email" placeholder="marie@email.com"></div>
+    <div class="form-grid" style="margin-bottom:0">
+      <div class="fg">
+        <label>Présence</label>
+        <select id="presence">
+          <option value="oui">Oui, avec joie !</option>
+          <option value="non">Je ne pourrai pas venir</option>
+        </select>
+      </div>
+      <div class="fg">
+        <label>Nombre de personnes</label>
+        <select id="nb"><option>1</option><option>2</option><option>3</option><option>4</option></select>
+      </div>
+    </div>
+    <div class="fg">
+      <label>Régime alimentaire</label>
+      <select>
+        <option>Aucune restriction</option>
+        <option>Végétarien</option>
+        <option>Vegan</option>
+        <option>Sans gluten</option>
+        <option>Allergie (préciser dans le message)</option>
+      </select>
+    </div>
+    <div class="fg">
+      <label>Souhaitez-vous la navette retour ?</label>
+      <select>
+        <option>Oui, 00h30</option>
+        <option>Oui, 02h00</option>
+        <option>Non merci</option>
+      </select>
+    </div>
+    <div class="fg">
+      <label>Un mot pour les mariés (optionnel)</label>
+      <textarea placeholder="Une chanson à demander, un souvenir partagé, une chanson favorite..."></textarea>
+    </div>
+    <button class="btn-submit" onclick="submitRSVP()">Confirmer ma présence</button>
+  </div>
+  <div class="rsvp-success" id="rsvpSuccess">
+    <h3>Merci !</h3>
+    <p>Votre réponse a bien été enregistrée.<br>Nous avons hâte de vous voir le 12 juillet !</p>
+  </div>
+
+</div>
+
+<footer>
+  <p class="footer-names">Pauline & Damien</p>
+  <div class="footer-hr"></div>
+  <p>12 juillet 2025 · Domaine des Trois Chênes · Avignon</p>
+  <p>Questions : <span style="color:var(--sage)">mariage@pauline-et-damien.fr</span></p>
+</footer>
+
+<script>
+function submitRSVP(){
+  const p=document.getElementById('prenom').value.trim();
+  const e=document.getElementById('email').value.trim();
+  if(!p||!e){alert('Merci de remplir au moins votre prénom et votre email.');return;}
+  document.getElementById('rsvpWrap').style.display='none';
+  document.getElementById('rsvpSuccess').style.display='block';
+}
+</script>
+</body>
+</html>
