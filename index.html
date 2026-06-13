@@ -71,6 +71,36 @@ nav{display:flex;justify-content:space-between;align-items:center;padding:1rem 3
 .timeline-content{border-left:1px solid var(--border);padding-left:1.5rem}
 .timeline-content h3{font-family:'Cormorant Garamond',serif;font-size:1.35rem;color:var(--sage);margin-bottom:.35rem}
 .timeline-content p{font-size:13.5px;color:var(--ink-m);line-height:1.8}
+.demande-gallery{display:grid;grid-template-columns:1.2fr 1fr;grid-auto-rows:96px;gap:.5rem;margin-top:1.1rem;max-width:300px}
+.demande-gallery figure{margin:0;overflow:hidden;border-radius:8px;border:1px solid var(--border);background:#efe9dd}
+.demande-gallery img{width:100%;height:100%;object-fit:cover;display:block}
+.demande-gallery .tall{grid-row:span 2}
+@media(max-width:500px){.demande-gallery{grid-auto-rows:84px}}
+.starter-pack{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:1.1rem;max-width:340px}
+.starter-pack figure{margin:0;border-radius:10px;overflow:hidden;border:1px solid var(--border);background:#efe9dd}
+.starter-pack img{display:block;width:100%;height:auto}
+.starter-caption{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:13px;color:var(--ink-s);text-align:center;margin-top:.6rem}
+@media(max-width:380px){.starter-pack{grid-template-columns:1fr}}
+.aventures-gallery{display:grid;grid-template-columns:1fr 1fr;grid-auto-rows:118px;gap:.5rem;margin-top:1.1rem}
+.aventures-gallery figure{position:relative;margin:0;overflow:hidden;border-radius:8px;border:1px solid var(--border);background:#efe9dd}
+.aventures-gallery img{width:100%;height:100%;object-fit:cover;display:block}
+.aventures-gallery .tall{grid-row:span 2}
+.aventures-gallery .wide{grid-column:span 2}
+.trip{margin-top:1.25rem}
+.trip-label{display:flex;align-items:center;gap:.6rem;font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.1rem;color:var(--orange-l);margin-bottom:.5rem}
+.trip-label::after{content:'';flex:1;height:1px;background:var(--border)}
+.carousel{overflow:hidden;position:relative}
+.carousel::before,.carousel::after{content:'';position:absolute;top:0;bottom:0;width:36px;z-index:2;pointer-events:none}
+.carousel::before{left:0;background:linear-gradient(to right,var(--bg),transparent)}
+.carousel::after{right:0;background:linear-gradient(to left,var(--bg),transparent)}
+.carousel-track{display:flex;gap:.5rem;width:max-content;animation:scroll-x linear infinite}
+.carousel:hover .carousel-track{animation-play-state:paused}
+.carousel img{height:150px;width:auto;border-radius:8px;border:1px solid var(--border);object-fit:cover;display:block;flex:0 0 auto}
+@keyframes scroll-x{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@media(max-width:500px){.carousel img{height:112px}}
+@media(prefers-reduced-motion:reduce){.carousel{overflow-x:auto}.carousel-track{animation:none}}
+.aventures-gallery figcaption{position:absolute;left:0;right:0;bottom:0;padding:.5rem .6rem .4rem;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:#fff;background:linear-gradient(to top,rgba(28,22,12,.7),transparent)}
+@media(max-width:500px){.aventures-gallery{grid-auto-rows:96px}}
 
 /* FOOTER */
 footer{text-align:center;padding:2.5rem 2rem 3rem;border-top:1px solid var(--border)}
@@ -119,24 +149,65 @@ footer p{font-size:12px;color:var(--ink-s);line-height:1.9}
   <div class="story-grid">
     <div class="timeline">
       <div class="timeline-item">
-        <div class="timeline-year">20XX</div>
+        <div class="timeline-year">2025</div>
         <div class="timeline-content">
           <h3>La rencontre</h3>
-          <p>C'est ici que commence votre histoire. Racontez comment vous vous êtes rencontrés — ce moment que vous n'oublierez jamais.</p>
+          <p>D'un côté Damien — son chat, son t-shirt NASA et sa passion dévorante pour les fusées. De l'autre Pauline — son chat, ses oreilles de Mickey et son amour inconditionnel de Disney. Deux « starter packs » que tout opposait… sauf l'essentiel (et les chats). Il ne manquait plus qu'une bague à ajouter à la collection.</p>
+          <div class="starter-pack">
+            <figure><img src="starter-B.png" alt="Starter pack de Damien : t-shirt NASA, fusée, satellite et chat noir"></figure>
+            <figure><img src="starter-A.png" alt="Starter pack de Pauline : oreilles de Mickey, bague, chat tigré et smoothie"></figure>
+          </div>
+          <p class="starter-caption">Édition limitée · deux pièces, une seule collection</p>
         </div>
       </div>
       <div class="timeline-item">
-        <div class="timeline-year">20XX</div>
+        <div class="timeline-year">2025</div>
         <div class="timeline-content">
           <h3>Nos aventures</h3>
-          <p>Les voyages, les fous rires, les moments complices. Ces années qui ont forgé votre certitude d'être faits l'un pour l'autre.</p>
+          <p>Depuis, on ne s'arrête plus. La Finlande et ses forêts gelées, La Réunion et ses cascades, ses volcans et ses couchers de soleil, Disneyland encore et toujours… et tant d'autres voyages, fous rires et petits bonheurs en chemin. Et le plus beau ? <em>Ce n'est pas terminé.</em></p>
+
+          <div class="trip">
+            <div class="trip-label">Finlande · hiver 2024</div>
+            <div class="carousel">
+              <div class="carousel-track" style="animation-duration:46s">
+                <img src="IMG-20241123-WA0107.jpg" alt=""><img src="PXL_20241124_113600740.jpg" alt=""><img src="IMG-20241123-WA0182.jpg" alt=""><img src="PXL_20241126_101422422.MP.jpg" alt=""><img src="IMG-20241123-WA0197.jpg" alt=""><img src="PXL_20241124_104811829.jpg" alt=""><img src="IMG-20241123-WA0226.jpg" alt=""><img src="PXL_20241122_111707581.MP.jpg" alt=""><img src="PXL_20241121_090226049.jpg" alt=""><img src="PXL_20241120_095536794.MP.jpg" alt="">
+                <img src="IMG-20241123-WA0107.jpg" alt=""><img src="PXL_20241124_113600740.jpg" alt=""><img src="IMG-20241123-WA0182.jpg" alt=""><img src="PXL_20241126_101422422.MP.jpg" alt=""><img src="IMG-20241123-WA0197.jpg" alt=""><img src="PXL_20241124_104811829.jpg" alt=""><img src="IMG-20241123-WA0226.jpg" alt=""><img src="PXL_20241122_111707581.MP.jpg" alt=""><img src="PXL_20241121_090226049.jpg" alt=""><img src="PXL_20241120_095536794.MP.jpg" alt="">
+              </div>
+            </div>
+          </div>
+
+          <div class="trip">
+            <div class="trip-label">La Réunion · 2025</div>
+            <div class="carousel">
+              <div class="carousel-track" style="animation-duration:50s">
+                <img src="PXL_20250604_091749149.jpg" alt=""><img src="IMG-20250605-WA0064.jpg" alt=""><img src="IMG-20250526-WA0071.jpg" alt=""><img src="IMG-20250605-WA0005.jpg" alt=""><img src="PXL_20250527_123031241.jpg" alt=""><img src="IMG-20250526-WA0090.jpg" alt=""><img src="IMG-20250605-WA0095.jpg" alt=""><img src="PXL_20250603_113756657.jpg" alt=""><img src="IMG-20250526-WA0078.jpg" alt=""><img src="IMG-20250523-WA0020.jpg" alt=""><img src="PXL_20250525_075333229.jpg" alt="">
+                <img src="PXL_20250604_091749149.jpg" alt=""><img src="IMG-20250605-WA0064.jpg" alt=""><img src="IMG-20250526-WA0071.jpg" alt=""><img src="IMG-20250605-WA0005.jpg" alt=""><img src="PXL_20250527_123031241.jpg" alt=""><img src="IMG-20250526-WA0090.jpg" alt=""><img src="IMG-20250605-WA0095.jpg" alt=""><img src="PXL_20250603_113756657.jpg" alt=""><img src="IMG-20250526-WA0078.jpg" alt=""><img src="IMG-20250523-WA0020.jpg" alt=""><img src="PXL_20250525_075333229.jpg" alt="">
+              </div>
+            </div>
+          </div>
+
+          <div class="trip">
+            <div class="trip-label">Disneyland · 2025</div>
+            <div class="carousel">
+              <div class="carousel-track" style="animation-duration:24s">
+                <img src="PXL_20251104_135636910.jpg" alt=""><img src="PXL_20251104_101010663.jpg" alt="">
+                <img src="PXL_20251104_135636910.jpg" alt=""><img src="PXL_20251104_101010663.jpg" alt="">
+                <img src="PXL_20251104_135636910.jpg" alt=""><img src="PXL_20251104_101010663.jpg" alt="">
+              </div>
+            </div>
+          </div>
         </div>
       </div>
       <div class="timeline-item">
-        <div class="timeline-year">20XX</div>
+        <div class="timeline-year">2025</div>
         <div class="timeline-content">
           <h3>La demande</h3>
-          <p>Il était une fois, à Disneyland ... </p>
+          <p>Le 3 novembre 2025, au pied du grand escalier d'un hôtel féerique pour les fêtes, Damien a posé un genou à terre. Un « oui » ému, une bague au doigt, et le début de notre plus belle aventure.</p>
+          <div class="demande-gallery">
+            <figure class="tall"><img src="IMG-20251104-WA0005.jpg" alt="Damien fait sa demande, un genou à terre"></figure>
+            <figure><img src="IMG-20251103-WA0034.jpg" alt="La bague de fiançailles au doigt"></figure>
+            <figure><img src="PXL_20251104_101105330.jpg" alt="Pauline et Damien tout sourire"></figure>
+          </div>
         </div>
       </div>
       <div class="timeline-item">
@@ -154,10 +225,10 @@ footer p{font-size:12px;color:var(--ink-s);line-height:1.9}
 <footer>
   <div class="footer-crest"><img src="watercolor-blooming-english-orange-peach-rose-branch-with-dry-twig-flower-bouquet-wreath-round-frame-png.webp" alt=""><span>Pauline &amp; Damien</span></div>
   <p>20 octobre 2027 · Château de Roquefoulet · Montgeard</p>
-  <p>Questions : <span style="color:var(--sage)">mariage@pauline-et-damien.fr</span></p>
+  <p>Questions : <span style="color:var(--sage)"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="9ff2feedf6fef8fadfeffeeaf3f6f1fab2faebb2fbfef2f6faf1b1f9ed">[email&#160;protected]</a></span></p>
 </footer>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 function updateCountdown(){
   const target=new Date('2027-10-20T15:00:00');
   const now=new Date();
