@@ -34,9 +34,25 @@ nav{display:flex;justify-content:space-between;align-items:center;padding:1rem 3
 .page-title{font-family:'Great Vibes',cursive;font-size:clamp(3rem,6vw,4.5rem);color:var(--sage);line-height:1.15}
 .page-rule{width:40px;height:1px;background:var(--border);margin:1rem auto 0}
 
-/* PALM BANNER */
-.palm-banner{width:100%;overflow:hidden;line-height:0}
-.palm-banner svg{display:block;width:100%}
+/* ── BOTANICAL DECOR ─────────────────────────── */
+/* champêtre meadow band */
+.meadow-band{width:100%;line-height:0;background:var(--bg);border-bottom:1px solid var(--border)}
+.meadow-band img{display:block;width:100%;height:185px;object-fit:cover;object-position:center bottom;mix-blend-mode:multiply}
+@media(max-width:600px){.meadow-band img{height:115px}}
+
+/* palm corner accents on the page header */
+.page-header{position:relative}
+.page-header>*{position:relative;z-index:2}
+.deco-palm{position:absolute;top:8px;width:240px;pointer-events:none;opacity:.92;z-index:1;filter:drop-shadow(0 6px 14px rgba(44,36,24,.08))}
+.deco-palm.left{left:-48px;transform:scaleX(-1) rotate(-4deg)}
+.deco-palm.right{right:-48px;transform:rotate(-4deg)}
+@media(max-width:820px){.deco-palm{width:140px;top:0}.deco-palm.left{left:-24px}.deco-palm.right{right:-24px}}
+@media(max-width:560px){.deco-palm{display:none}}
+
+/* footer rose-wreath crest */
+.footer-crest{position:relative;width:184px;height:172px;margin:0 auto .25rem;display:flex;align-items:center;justify-content:center}
+.footer-crest img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain}
+.footer-crest span{position:relative;font-family:'Great Vibes',cursive;font-size:1.5rem;line-height:1.05;color:var(--sage);max-width:128px;text-align:center}
 
 /* CONTENT */
 .content{max-width:860px;margin:0 auto;padding:3rem 3rem 5rem}
@@ -47,7 +63,12 @@ nav{display:flex;justify-content:space-between;align-items:center;padding:1rem 3
 .sec-rule{width:32px;height:1px;background:var(--border);margin:.6rem 0 2rem}
 
 /* PROGRAMME */
-.programme{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);border:1px solid var(--border);border-radius:8px;overflow:hidden;margin-bottom:3.5rem}
+.programme{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);border:1px solid var(--border);border-radius:8px;overflow:hidden;margin-bottom:2.5rem}
+.prog-day{display:flex;align-items:baseline;gap:.85rem;margin:0 0 1rem}
+.prog-day:not(:first-of-type){margin-top:2.5rem}
+.prog-day-name{font-family:'Cormorant Garamond',serif;font-size:1.35rem;font-style:italic;color:var(--sage);white-space:nowrap}
+.prog-day-date{font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--orange);white-space:nowrap}
+.prog-day-line{flex:1;height:1px;background:var(--border)}
 @media(max-width:580px){.programme{grid-template-columns:1fr}}
 .prog-item{background:var(--bg);padding:1.5rem 1.75rem;display:flex;gap:1.25rem;align-items:flex-start}
 .prog-time{font-family:'Cormorant Garamond',serif;font-size:1.1rem;color:var(--orange);font-weight:300;white-space:nowrap;padding-top:.1rem;min-width:52px}
@@ -65,8 +86,11 @@ nav{display:flex;justify-content:space-between;align-items:center;padding:1rem 3
 
 /* HEBERGEMENT */
 .hotel-list{display:flex;flex-direction:column;gap:.75rem;margin-bottom:3.5rem}
-.hotel-card{background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:1.25rem 1.5rem;display:grid;grid-template-columns:1fr auto;align-items:center;gap:1rem}
-@media(max-width:500px){.hotel-card{grid-template-columns:1fr}}
+.hotel-card{background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:1.25rem 1.5rem;display:grid;grid-template-columns:104px 1fr auto;align-items:center;gap:1.25rem}
+.hotel-photo{width:104px;height:104px;border-radius:8px;overflow:hidden;border:1px solid var(--border);background:repeating-linear-gradient(45deg,#efe9dd,#efe9dd 7px,#f4efe5 7px,#f4efe5 14px);display:flex;align-items:center;justify-content:center;text-align:center;padding:8px;flex-shrink:0}
+.hotel-photo span{font-size:9px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-s);line-height:1.4}
+.hotel-photo img{width:100%;height:100%;object-fit:cover}
+@media(max-width:500px){.hotel-card{grid-template-columns:72px 1fr;gap:.9rem}.hotel-photo{width:72px;height:72px}.hotel-card .badge{grid-column:2;justify-self:start;margin-top:.35rem}}
 .hotel-card h3{font-family:'Cormorant Garamond',serif;font-size:.95rem;font-weight:400;color:var(--ink);margin-bottom:.2rem}
 .hotel-card p{font-size:12px;color:var(--ink-s);line-height:1.55}
 .hotel-card a{color:var(--orange);font-size:11.5px;text-decoration:none}
@@ -95,12 +119,15 @@ footer{text-align:center;padding:2.5rem 2rem;border-top:1px solid var(--border)}
 footer p{font-size:12px;color:var(--ink-s);line-height:1.9}
 .footer-names{font-family:'Great Vibes',cursive;font-size:2rem;color:var(--sage);margin-bottom:.25rem}
 .footer-hr{width:40px;height:1px;background:var(--orange-l);margin:.5rem auto}
+/* FLORAL DECOR */
+.floral-banner{display:block;width:100%;height:300px;object-fit:cover;object-position:center 42%;border-radius:10px;border:1px solid var(--border);margin-bottom:3rem}
+.floral-ornament{display:block;margin:.5rem auto 3rem;width:160px;height:auto}
 </style>
 </head>
 <body>
 
 <nav>
-  <a href="index.html" class="nav-logo">Pauline & Damien</a>
+  <a href="index.html" class="nav-logo">Pauline &amp; Damien</a>
   <ul class="nav-links">
     <li><a href="index.html">Accueil</a></li>
     <li><a href="infos.html" class="active">Infos & RSVP</a></li>
@@ -109,49 +136,39 @@ footer p{font-size:12px;color:var(--ink-s);line-height:1.9}
 </nav>
 
 <div class="page-header">
-  <p class="page-eyebrow">12 juillet 2025</p>
-  <h1 class="page-title">Infos & RSVP</h1>
+  <p class="page-eyebrow">20 octobre 2027</p>
+  <h1 class="page-title" style="font-family: 'Cormorant Garamond'">Infos & RSVP</h1>
   <div class="page-rule"></div>
-</div>
-
-<!-- Palm banner -->
-<div class="palm-banner">
-  <svg viewBox="0 0 680 90" xmlns="http://www.w3.org/2000/svg">
-    <rect width="680" height="90" fill="#f7f3ed"/>
-    <g opacity="0.7">
-      <path d="M0 90 Q5 65 15 50 Q22 38 32 30" stroke="#2e4e30" stroke-width="3" fill="none" stroke-linecap="round"/>
-      <path d="M32 30 Q75 5 130 -5" stroke="#3a5a3c" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-      <path d="M32 30 Q20 10 5 -5" stroke="#3a5a3c" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-      <path d="M32 30 Q30 8 28 -10" stroke="#3a5a3c" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-      <path d="M38 22 Q78 5 130 -5" stroke="#3a5a3c" stroke-width="8" fill="none" stroke-linecap="round" opacity="0.38"/>
-      <path d="M26 22 Q12 5 -2 -5" stroke="#3a5a3c" stroke-width="7" fill="none" stroke-linecap="round" opacity="0.38"/>
-      <path d="M30 22 Q28 4 26 -12" stroke="#3a5a3c" stroke-width="7" fill="none" stroke-linecap="round" opacity="0.38"/>
-      <path d="M40 21 Q80 3 130 -5" stroke="#2e4e30" stroke-width="1.5" fill="none" stroke-linecap="round"/>
-      <path d="M27 21 Q13 4 -3 -5" stroke="#2e4e30" stroke-width="1.5" fill="none" stroke-linecap="round"/>
-      <path d="M31 21 Q29 3 27 -12" stroke="#2e4e30" stroke-width="1.5" fill="none" stroke-linecap="round"/>
-    </g>
-    <g opacity="0.7" transform="translate(680,0) scale(-1,1)">
-      <path d="M0 90 Q5 65 15 50 Q22 38 32 30" stroke="#2e4e30" stroke-width="3" fill="none" stroke-linecap="round"/>
-      <path d="M32 30 Q75 5 130 -5" stroke="#3a5a3c" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-      <path d="M32 30 Q20 10 5 -5" stroke="#3a5a3c" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-      <path d="M32 30 Q30 8 28 -10" stroke="#3a5a3c" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-      <path d="M38 22 Q78 5 130 -5" stroke="#3a5a3c" stroke-width="8" fill="none" stroke-linecap="round" opacity="0.38"/>
-      <path d="M26 22 Q12 5 -2 -5" stroke="#3a5a3c" stroke-width="7" fill="none" stroke-linecap="round" opacity="0.38"/>
-      <path d="M30 22 Q28 4 26 -12" stroke="#3a5a3c" stroke-width="7" fill="none" stroke-linecap="round" opacity="0.38"/>
-      <path d="M40 21 Q80 3 130 -5" stroke="#2e4e30" stroke-width="1.5" fill="none" stroke-linecap="round"/>
-      <path d="M27 21 Q13 4 -3 -5" stroke="#2e4e30" stroke-width="1.5" fill="none" stroke-linecap="round"/>
-      <path d="M31 21 Q29 3 27 -12" stroke="#2e4e30" stroke-width="1.5" fill="none" stroke-linecap="round"/>
-    </g>
-    <line x1="0" y1="88" x2="680" y2="88" stroke="#ddd5c5" stroke-width="0.5"/>
-  </svg>
 </div>
 
 <div class="content">
 
   <!-- PROGRAMME -->
   <p class="sec-eyebrow">Déroulement</p>
-  <h2 class="sec-title">Programme du jour</h2>
+  <h2 class="sec-title" style="font-family: 'Cormorant Garamond'">Le programme</h2>
   <div class="sec-rule"></div>
+
+  <div class="prog-day"><span class="prog-day-name">À la mairie</span><span class="prog-day-date">Mardi 19 octobre 2027</span><span class="prog-day-line"></span></div>
+  <div class="programme">
+    <div class="prog-item">
+      <div class="prog-time">11h00</div>
+      <div class="prog-content"><h3>Cérémonie civile</h3><p>À la mairie de Mons, en comité restreint</p></div>
+    </div>
+    <div class="prog-item">
+      <div class="prog-time">12h30</div>
+      <div class="prog-content"><h3>Déjeuner</h3><p>Repas au restaurant avec les proches</p></div>
+    </div>
+    <div class="prog-item">
+      <div class="prog-time">16h00</div>
+      <div class="prog-content"><h3>Arrivée au château</h3><p>Installation et préparatifs des mariés avant la célébration</p></div>
+    </div>
+    <div class="prog-item">
+      <div class="prog-time">20h00</div>
+      <div class="prog-content"><h3>Dîner</h3><p>Repas au restaurant avec les proches</p></div>
+    </div>
+  </div>
+
+  <div class="prog-day"><span class="prog-day-name">Au château</span><span class="prog-day-date">Mercredi 20 octobre 2027</span><span class="prog-day-line"></span></div>
   <div class="programme">
     <div class="prog-item">
       <div class="prog-time">14h30</div>
@@ -175,67 +192,83 @@ footer p{font-size:12px;color:var(--ink-s);line-height:1.9}
     </div>
     <div class="prog-item">
       <div class="prog-time">20h00</div>
-      <div class="prog-content"><h3>Dîner & soirée</h3><p>Repas assis, musique live, feu d'artifice à minuit</p></div>
+      <div class="prog-content"><h3>Dîner & soirée</h3><p>Repas assis, musique live et soirée dansante</p></div>
+    </div>
+  </div>
+
+  <div class="prog-day"><span class="prog-day-name">Le lendemain</span><span class="prog-day-date">Jeudi 21 octobre 2027</span><span class="prog-day-line"></span></div>
+  <div class="programme">
+    <div class="prog-item">
+      <div class="prog-time">11h00</div>
+      <div class="prog-content"><h3>Brunch champêtre</h3><p>Au domaine, pour prolonger la fête en douceur</p></div>
+    </div>
+    <div class="prog-item">
+      <div class="prog-time">15h00</div>
+      <div class="prog-content"><h3>Au revoir</h3><p>Derniers câlins et départ des invités</p></div>
     </div>
   </div>
 
   <!-- LIEU -->
   <p class="sec-eyebrow">Où nous retrouver</p>
-  <h2 class="sec-title">Le lieu</h2>
+  <h2 class="sec-title" style="font-family: 'Cormorant Garamond'">Le lieu</h2>
   <div class="sec-rule"></div>
+  <img class="floral-banner" src="images.jpg" alt="Décor floral en pampas et roses">
   <div class="lieu-grid">
     <div class="lieu-card">
       <h3>Adresse</h3>
-      <p>Domaine des Trois Chênes<br>Route de la Forêt<br>84000 Avignon</p>
-      <a href="https://maps.google.com" target="_blank">Voir sur Google Maps →</a>
+      <p>Château de Roquefoulet<br>Hameau de Roquefoulet<br>31560 Montgeard</p>
+      <a href="https://maps.google.com/?q=Ch%C3%A2teau+de+Roquefoulet+Montgeard" target="_blank">Voir sur Google Maps →</a>
     </div>
     <div class="lieu-card">
       <h3>Accès & parking</h3>
-      <p>Parking gratuit sur place · 15 min depuis le centre d'Avignon · Navette retour prévue à 00h30 et 02h00</p>
+      <p>Parking gratuit sur place · À 30 min en voiture de Toulouse</p>
     </div>
   </div>
 
   <!-- HEBERGEMENT -->
   <p class="sec-eyebrow">Dormir sur place</p>
-  <h2 class="sec-title">Hébergement</h2>
+  <h2 class="sec-title" style="font-family: 'Cormorant Garamond'">Hébergement</h2>
   <div class="sec-rule"></div>
   <div class="hotel-list">
     <div class="hotel-card">
+      <div class="hotel-photo"><span>Photo<br>Les Camparros</span></div>
       <div>
-        <h3>Mas de la Garrigue · 4 étoiles</h3>
-        <p>À 5 min du domaine · Tarif groupe négocié · Code : MARIAGE2025 · <a href="#">Réserver</a></p>
+        <h3>Gîtes & Chambres d'hôtes des Camparros</h3>
+        <p>Nailloux · à ~10 min du château · Gîtes et chambres d'hôtes avec table familiale · dès 50 €/nuit · <a href="#">Réserver</a></p>
       </div>
-      <span class="badge">Recommandé</span>
+      <span class="badge">Proche</span>
     </div>
     <div class="hotel-card">
+      <div class="hotel-photo"><span>Photo<br>Lo Barri</span></div>
       <div>
-        <h3>Camping Les Oliviers · 3 étoiles</h3>
-        <p>À 10 min · Bungalows & tentes glamping · <a href="#">Réserver</a></p>
+        <h3>Chambre d'hôtes Lo Barri</h3>
+        <p>Montgeard · à ~5 min · Table d'hôtes, cuisine du Sud-Ouest · dès 65 €/nuit · <a href="#">Réserver</a></p>
       </div>
-      <span class="badge">Bucolique</span>
+      <span class="badge">Charme</span>
     </div>
     <div class="hotel-card">
+      <div class="hotel-photo"><span>Photo<br>Lac de la Thésauque</span></div>
       <div>
-        <h3>Navette domaine ↔ Avignon</h3>
-        <p>Départs à 00h30 et 02h00 · Gratuit · Inscription via le formulaire RSVP ci-dessous</p>
+        <h3>Camping du Lac de la Thésauque</h3>
+        <p>Montgeard · à ~10 min · Chalets & restaurant au bord de l'eau, piscine · <a href="#">Réserver</a></p>
       </div>
-      <span class="badge">Gratuit</span>
+      <span class="badge">Nature</span>
     </div>
   </div>
 
   <!-- DRESS CODE -->
   <p class="sec-eyebrow">Tenue</p>
-  <h2 class="sec-title">Dress code</h2>
+  <h2 class="sec-title" style="font-family: 'Cormorant Garamond'">Dress code</h2>
   <div class="sec-rule"></div>
   <div class="dress-box">
-    <p><strong style="color:var(--sage)">Bohème chic & tons naturels.</strong> Teintes sauge, terracotta, nude, crème et blanc cassé bienvenues. La cérémonie se déroulant sur pelouse, les talons aiguilles sont déconseillés. Venez à l'aise et dans votre plus beau naturel !</p>
+    <p><strong style="color:var(--sage)">Pas de dress code,</strong> venez comme vous êtes !</p>
   </div>
 
   <!-- RSVP -->
   <p class="sec-eyebrow">Confirmez votre présence</p>
-  <h2 class="sec-title">RSVP</h2>
+  <h2 class="sec-title" style="font-family: 'Cormorant Garamond'">RSVP</h2>
   <div class="sec-rule"></div>
-  <p style="font-size:13px;color:var(--ink-s);margin-bottom:1.5rem">Merci de répondre avant le <strong style="color:var(--ink-m)">15 mai 2025</strong>. Pour toute question : <a href="mailto:mariage@pauline-et-damien.fr" style="color:var(--sage)">mariage@pauline-et-damien.fr</a></p>
+  <p style="font-size:13px;color:var(--ink-s);margin-bottom:1.5rem">Merci de répondre avant le <strong style="color:var(--ink-m)">31 décembre 2026</strong>. Pour toute question : <a href="mailto:mariage@pauline-et-damien.fr" style="color:var(--sage)">mariage@pauline-et-damien.fr</a></p>
   <div class="rsvp-wrap" id="rsvpWrap">
     <div class="form-grid" style="margin-bottom:0">
       <div class="fg"><label>Prénom *</label><input type="text" id="prenom" placeholder="Marie"></div>
@@ -266,14 +299,6 @@ footer p{font-size:12px;color:var(--ink-s);line-height:1.9}
       </select>
     </div>
     <div class="fg">
-      <label>Souhaitez-vous la navette retour ?</label>
-      <select>
-        <option>Oui, 00h30</option>
-        <option>Oui, 02h00</option>
-        <option>Non merci</option>
-      </select>
-    </div>
-    <div class="fg">
       <label>Un mot pour les mariés (optionnel)</label>
       <textarea placeholder="Une chanson à demander, un souvenir partagé, une chanson favorite..."></textarea>
     </div>
@@ -287,10 +312,9 @@ footer p{font-size:12px;color:var(--ink-s);line-height:1.9}
 </div>
 
 <footer>
-  <p class="footer-names">Pauline & Damien</p>
-  <div class="footer-hr"></div>
-  <p>12 juillet 2025 · Domaine des Trois Chênes · Avignon</p>
-  <p>Questions : <span style="color:var(--sage)">paulinedamien31@gmail.com</span></p>
+  <div class="footer-crest"><img src="watercolor-blooming-english-orange-peach-rose-branch-with-dry-twig-flower-bouquet-wreath-round-frame-png.webp" alt=""><span>Pauline &amp; Damien</span></div>
+  <p>20 octobre 2027 · Château de Roquefoulet · Montgeard</p>
+  <p>Questions : <span style="color:var(--sage)">mariage@pauline-et-damien.fr</span></p>
 </footer>
 
 <script>
