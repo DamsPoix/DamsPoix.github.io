@@ -341,7 +341,7 @@ footer p{font-size:12px;color:var(--ink-s);line-height:1.9}
    2. Suivez les étapes (créer la feuille, coller le script, déployer).
    3. Collez ci-dessous l'URL de déploiement (se terminant par /exec) :
    ───────────────────────────────────────────────────────────── */
-const SHEET_ENDPOINT = ""; // ← collez ici votre URL Apps Script /exec
+const SHEET_ENDPOINT = "https://script.google.com/macros/s/AKfycbyH5-RrDIljxXD_GYOrbm1FgNFE8f77OWX5PxfRs5WqzjtIi60V35ETRkXbuEw_McjIbA/exec"; // ← collez ici votre URL Apps Script /exec
 
 async function submitRSVP(){
   const get = id => (document.getElementById(id)?.value || '').trim();
