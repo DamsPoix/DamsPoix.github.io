@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Souvenirs — Pauline & Damien</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#f7f3ed;
+  --sage:#5a7a5c;--sage-l:#8aaa8c;--sage-ll:#c0d4c0;--sage-p:#eef4ee;
+  --orange:#c85a28;--orange-l:#e07848;--orange-ll:#f5d0b8;--orange-p:#fdf4ee;
+  --gold:#b8882a;--gold-l:#d4a84a;--gold-ll:#f0deb0;
+  --ink:#2c2418;--ink-m:#5a4e3a;--ink-s:#8a7a62;
+  --border:#ddd5c5;
+}
+html{scroll-behavior:smooth}
+body{font-family:'Jost',sans-serif;background:var(--bg);color:var(--ink);min-height:100vh}
+
+nav{display:flex;justify-content:space-between;align-items:center;gap:.75rem 1.5rem;flex-wrap:wrap;padding:1rem clamp(1.25rem,4vw,3rem);background:var(--bg);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:100}
+.nav-logo{font-family:'Great Vibes',cursive;font-size:clamp(1.35rem,3.5vw,1.6rem);color:var(--sage);text-decoration:none;white-space:nowrap}
+.nav-links{display:flex;flex-wrap:wrap;gap:.5rem 1.75rem;list-style:none}
+.nav-links a{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-s);text-decoration:none;transition:color .2s;white-space:nowrap}
+.nav-links a:hover,.nav-links a.active{color:var(--orange)}
+@media(max-width:560px){nav{justify-content:center;text-align:center}.nav-links{justify-content:center;gap:.4rem 1.25rem}}
+
+/* PAGE HEADER */
+.page-header{padding:4rem 3rem 3rem;text-align:center;max-width:700px;margin:0 auto}
+@media(max-width:600px){.page-header{padding:2.5rem 1.5rem 2rem}}
+.page-eyebrow{font-size:11px;letter-spacing:.25em;text-transform:uppercase;color:var(--orange);margin-bottom:.5rem}
+.page-title{font-family:'Great Vibes',cursive;font-size:clamp(3rem,6vw,4.5rem);color:var(--sage);line-height:1.15}
+.page-intro{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-style:italic;color:var(--ink-m);margin-top:1rem;line-height:1.6}
+.page-rule{width:40px;height:1px;background:var(--border);margin:1.5rem auto 0}
+
+/* CONTENT */
+.content{max-width:1080px;margin:0 auto;padding:0 clamp(1.5rem,5vw,3rem) clamp(4rem,7vw,5rem)}
+
+/* UPLOAD CARD */
+.upload-card{background:#fff;border:1px solid var(--border);border-radius:10px;padding:2rem clamp(1.5rem,4vw,2.75rem);text-align:center;border-top:2px solid var(--orange);margin-bottom:3rem}
+.upload-card h2{font-family:'Cormorant Garamond',serif;font-size:1.6rem;color:var(--sage);margin-bottom:.6rem}
+.upload-card p{font-size:14px;color:var(--ink-m);line-height:1.7;max-width:520px;margin:0 auto 1.5rem}
+.btn-upload{display:inline-block;background:var(--sage);color:#fff;padding:.85rem 2.25rem;border-radius:4px;font-size:11.5px;letter-spacing:.15em;text-transform:uppercase;text-decoration:none;transition:background .2s}
+.btn-upload:hover{background:var(--sage-l)}
+.upload-note{font-size:11px;color:var(--ink-s);margin-top:1rem;font-style:italic}
+
+/* GALLERY */
+.gallery-header{display:flex;align-items:baseline;justify-content:space-between;gap:1rem;margin-bottom:1.25rem;flex-wrap:wrap}
+.gallery-header h2{font-family:'Cormorant Garamond',serif;font-size:1.7rem;color:var(--sage)}
+.btn-refresh{font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--orange);background:none;border:1px solid var(--orange-ll);padding:.5rem 1rem;border-radius:20px;cursor:pointer;transition:background .2s}
+.btn-refresh:hover{background:var(--orange-p)}
+.btn-refresh:disabled{opacity:.5;cursor:default}
+
+.gallery-grid{columns:4 220px;column-gap:.6rem}
+.gallery-grid figure{break-inside:avoid;margin:0 0 .6rem;border-radius:8px;overflow:hidden;border:1px solid var(--border);background:#efe9dd;line-height:0}
+.gallery-grid img{width:100%;height:auto;display:block;cursor:zoom-in;transition:transform .3s}
+.gallery-grid img:hover{transform:scale(1.02)}
+@media(max-width:640px){.gallery-grid{columns:2 160px}}
+
+.gallery-state{text-align:center;padding:3rem 1.5rem;color:var(--ink-s);font-size:13.5px;line-height:1.8}
+.gallery-state a{color:var(--orange)}
+
+/* LIGHTBOX */
+.lightbox{position:fixed;inset:0;background:rgba(28,22,12,.92);display:none;align-items:center;justify-content:center;z-index:1000;padding:2rem}
+.lightbox.show{display:flex}
+.lightbox img{max-width:100%;max-height:100%;border-radius:6px}
+.lightbox-close{position:absolute;top:1.25rem;right:1.75rem;color:#fff;font-size:2rem;line-height:1;cursor:pointer;font-family:sans-serif}
+
+/* FOOTER */
+footer{text-align:center;padding:2.5rem 2rem;border-top:1px solid var(--border)}
+footer p{font-size:12px;color:var(--ink-s);line-height:1.9}
+.footer-crest{position:relative;width:184px;height:172px;margin:0 auto .25rem;display:flex;align-items:center;justify-content:center}
+.footer-crest img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain}
+.footer-crest span{position:relative;font-family:'Great Vibes',cursive;font-size:1.5rem;line-height:1.05;color:var(--sage);max-width:128px;text-align:center}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">Pauline &amp; Damien</a>
+  <ul class="nav-links">
+    <li><a href="index.html">Accueil</a></li>
+    <li><a href="infos.html">Infos & RSVP</a></li>
+    <li><a href="cagnotte.html">Cagnotte</a></li>
+    <li><a href="souvenirs.html" class="active">Souvenirs</a></li>
+  </ul>
+</nav>
+
+<div class="page-header">
+  <p class="page-eyebrow">Vos souvenirs</p>
+  <h1 class="page-title">Souvenirs</h1>
+  <p class="page-intro">Partagez vos plus belles photos de nous, d'eux, de tous ! Elles apparaîtront ici, pour que tout le monde en profite.</p>
+  <div class="page-rule"></div>
+</div>
+
+<div class="content">
+
+  <div class="upload-card">
+    <h2>Ajouter des photos</h2>
+    <p>Sélectionnez une ou plusieurs photos depuis votre téléphone ou ordinateur, puis envoyez-les. Elles apparaissent ensuite dans la galerie ci-dessous.</p>
+    <input type="file" id="fileInput" accept="image/*" multiple style="display:none" onchange="onFilesChosen()">
+    <button type="button" class="btn-upload" id="chooseBtn" onclick="document.getElementById('fileInput').click()">Choisir des photos</button>
+    <p class="upload-note" id="uploadStatus">JPEG / PNG / HEIC · 15 Mo max par photo</p>
+  </div>
+
+  <div class="gallery-header">
+    <h2>La galerie</h2>
+    <button class="btn-refresh" id="refreshBtn" onclick="loadPhotos()">Actualiser</button>
+  </div>
+  <div id="galleryState" class="gallery-state">Chargement des souvenirs…</div>
+  <div class="gallery-grid" id="galleryGrid"></div>
+
+</div>
+
+<div class="lightbox" id="lightbox" onclick="closeLightbox(event)">
+  <span class="lightbox-close" onclick="closeLightbox(event)">&times;</span>
+  <img id="lightboxImg" src="" alt="">
+</div>
+
+<footer>
+  <div class="footer-crest"><img src="watercolor-blooming-english-orange-peach-rose-branch-with-dry-twig-flower-bouquet-wreath-round-frame-png.webp" alt=""><span>Pauline &amp; Damien</span></div>
+  <p>20 octobre 2027 · Château de Roquefoulet · Montgeard</p>
+  <p>Questions : <span style="color:var(--sage)"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="016c607368606664417160746d686f642c64752c65606c68646f2f6773">[email&#160;protected]</a></span></p>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+/* ─────────────────────────────────────────────────────────────
+   Souvenirs ↔ Google Drive (un seul script gère la liste + l'envoi)
+   1. Ouvrez le fichier "google-apps-script-souvenirs.gs" fourni.
+   2. Suivez les étapes (créer le dossier Drive privé, coller le script, déployer).
+   3. Collez ci-dessous l'URL de déploiement (se terminant par /exec) :
+   ───────────────────────────────────────────────────────────── */
+const PHOTOS_ENDPOINT = ""; // ← collez ici votre URL Apps Script /exec (sert aussi à l'envoi)
+
+let chosenFiles = [];
+
+function onFilesChosen(){
+  const input = document.getElementById('fileInput');
+  chosenFiles = [...input.files];
+  const status = document.getElementById('uploadStatus');
+  const btn = document.getElementById('chooseBtn');
+  if(chosenFiles.length === 0) return;
+  btn.textContent = 'Envoyer ' + chosenFiles.length + (chosenFiles.length>1?' photos':' photo');
+  btn.onclick = uploadChosenFiles;
+  status.textContent = chosenFiles.map(f=>f.name).join(', ');
+}
+
+function fileToBase64(file){
+  return new Promise((resolve,reject)=>{
+    const reader = new FileReader();
+    reader.onload = () => resolve(reader.result.split(',')[1]);
+    reader.onerror = reject;
+    reader.readAsDataURL(file);
+  });
+}
+
+async function uploadChosenFiles(){
+  if(!PHOTOS_ENDPOINT){
+    alert("L'envoi n'est pas encore configuré. Voir google-apps-script-souvenirs.gs");
+    return;
+  }
+  const status = document.getElementById('uploadStatus');
+  const btn = document.getElementById('chooseBtn');
+  btn.disabled = true;
+
+  for(let i=0;i<chosenFiles.length;i++){
+    const file = chosenFiles[i];
+    status.textContent = `Envoi ${i+1}/${chosenFiles.length} — ${file.name}…`;
+    try{
+      const dataBase64 = await fileToBase64(file);
+      await fetch(PHOTOS_ENDPOINT, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+        body: JSON.stringify({ name: file.name, mimeType: file.type, dataBase64 })
+      });
+    }catch(err){
+      console.error('Échec envoi', file.name, err);
+    }
+  }
+
+  status.textContent = 'Merci ! Vos photos ont été envoyées 🎉';
+  btn.textContent = 'Choisir des photos';
+  btn.onclick = () => document.getElementById('fileInput').click();
+  btn.disabled = false;
+  chosenFiles = [];
+  document.getElementById('fileInput').value = '';
+  setTimeout(loadPhotos, 2500);
+}
+
+async function loadPhotos(){
+  const grid = document.getElementById('galleryGrid');
+  const state = document.getElementById('galleryState');
+  const btn = document.getElementById('refreshBtn');
+  btn.disabled = true;
+
+  if(!PHOTOS_ENDPOINT){
+    state.style.display = 'block';
+    state.innerHTML = "La galerie n'est pas encore connectée.<br>Suivez les instructions dans <em>google-apps-script-souvenirs.gs</em> pour l'activer.";
+    grid.innerHTML = '';
+    btn.disabled = false;
+    return;
+  }
+
+  state.style.display = 'block';
+  state.textContent = 'Chargement des souvenirs…';
+  grid.innerHTML = '';
+
+  try{
+    const res = await fetch(PHOTOS_ENDPOINT);
+    const photos = await res.json();
+
+    if(!Array.isArray(photos) || photos.length === 0){
+      state.innerHTML = "Aucune photo pour le moment.<br>Soyez le·la premier·ère à en ajouter !";
+      btn.disabled = false;
+      return;
+    }
+
+    state.style.display = 'none';
+    grid.innerHTML = photos.map(p => `
+      <figure>
+        <img src="${p.url}" alt="${(p.name||'Souvenir').replace(/"/g,'&quot;')}" loading="lazy" onclick="openLightbox('${p.url}')">
+      </figure>
+    `).join('');
+
+  }catch(err){
+    console.error(err);
+    state.innerHTML = "Impossible de charger les photos pour le moment.<br>Réessayez dans un instant.";
+  }
+  btn.disabled = false;
+}
+
+function openLightbox(url){
+  document.getElementById('lightboxImg').src = url;
+  document.getElementById('lightbox').classList.add('show');
+}
+function closeLightbox(e){
+  document.getElementById('lightbox').classList.remove('show');
+  document.getElementById('lightboxImg').src = '';
+}
+
+loadPhotos();
+</script>
+</body>
+</html>
