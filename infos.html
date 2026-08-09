@@ -7,6 +7,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=IM+Fell+French+Canon+SC&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="modern.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 :root{
@@ -149,7 +152,7 @@ footer p{font-size:12px;color:var(--ink-s);line-height:1.9}
 
   <!-- PROGRAMME -->
   <p class="sec-eyebrow">Déroulement</p>
-  <h2 class="sec-title">Le programme</h2>
+  <h2 class="sec-title reveal">Le programme</h2>
   <div class="sec-rule"></div>
 
   <div class="prog-day"><span class="prog-day-name">À la mairie</span><span class="prog-day-date">Mardi 19 octobre 2027</span><span class="prog-day-line"></span></div>
@@ -214,7 +217,7 @@ footer p{font-size:12px;color:var(--ink-s);line-height:1.9}
 
   <!-- LIEU -->
   <p class="sec-eyebrow">Où nous retrouver</p>
-  <h2 class="sec-title">Le lieu</h2>
+  <h2 class="sec-title reveal">Le lieu</h2>
   <div class="sec-rule"></div>
   <img class="lieu-photo" src="chateau-roquefoulet.jpeg" alt="Château de Roquefoulet illuminé le soir">
   <div class="lieu-grid">
@@ -231,7 +234,7 @@ footer p{font-size:12px;color:var(--ink-s);line-height:1.9}
 
   <!-- HEBERGEMENT -->
   <p class="sec-eyebrow">Dormir sur place</p>
-  <h2 class="sec-title">Hébergement</h2>
+  <h2 class="sec-title reveal">Hébergement</h2>
   <div class="sec-rule"></div>
   <div class="hotel-list">
     <div class="hotel-card">
@@ -262,7 +265,7 @@ footer p{font-size:12px;color:var(--ink-s);line-height:1.9}
 
   <!-- DRESS CODE -->
   <p class="sec-eyebrow">Tenue</p>
-  <h2 class="sec-title">Dress code</h2>
+  <h2 class="sec-title reveal">Dress code</h2>
   <div class="sec-rule"></div>
   <div class="dress-box">
     <p><strong style="color:var(--sage)">Pas de dress code,</strong> venez comme vous êtes !</p>
@@ -270,7 +273,7 @@ footer p{font-size:12px;color:var(--ink-s);line-height:1.9}
 
   <!-- RSVP -->
   <p class="sec-eyebrow">Confirmez votre présence</p>
-  <h2 class="sec-title">RSVP</h2>
+  <h2 class="sec-title reveal">RSVP</h2>
   <div class="sec-rule"></div>
   <p style="font-size:13px;color:var(--ink-s);margin-bottom:1.5rem">Merci de répondre avant le <strong style="color:var(--ink-m)">31 décembre 2026</strong>. Pour toute question : <a href="/cdn-cgi/l/email-protection#d8b5b9aab1b9bfbd98a8b9adb4b1b6bdf5bdacf5bcb9b5b1bdb6f6beaa" style="color:var(--sage)"><span class="__cf_email__" data-cfemail="84e9e5f6ede5e3e1c4f4e5f1e8edeae1a9e1f0a9e0e5e9ede1eaaae2f6">[email&#160;protected]</span></a></p>
   <div class="rsvp-wrap" id="rsvpWrap">
@@ -403,5 +406,6 @@ function toggleEnfantsNb(){
   wrap.style.display = oui ? 'flex' : 'none';
 }
 </script>
+<script src="modern.js"></script>
 </body>
 </html>

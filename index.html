@@ -7,6 +7,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=IM+Fell+French+Canon+SC&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="modern.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 :root{
@@ -47,7 +50,7 @@ nav{display:flex;justify-content:space-between;align-items:center;gap:.75rem 1.5
 /* ORBIT GALLERY */
 .orbit-wrap{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none;z-index:1}
 .orbit{position:relative;width:640px;height:640px}
-.orbit-photo{position:absolute;top:50%;left:50%;width:98px;height:98px;margin:-49px 0 0 -49px;border-radius:50%;overflow:hidden;border:3px solid #fff;box-shadow:0 6px 18px rgba(44,36,24,.18);transition:transform 2.6s cubic-bezier(.65,0,.35,1),box-shadow .4s,border-color .4s}
+.orbit-photo{position:absolute;top:50%;left:50%;width:98px;height:98px;margin:-49px 0 0 -49px;border-radius:50%;overflow:hidden;border:3px solid #fff;box-shadow:0 6px 18px rgba(44,36,24,.18);transition:box-shadow .4s,border-color .4s}
 .orbit-photo img{width:100%;height:100%;object-fit:cover;display:block}
 .orbit-photo.active{box-shadow:0 10px 30px rgba(200,90,40,.4);border-color:var(--orange-l);z-index:2}
 .orbit-caption{margin-top:1.75rem;font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.05rem;color:var(--ink-m);line-height:1.6;min-height:2.6em;opacity:1;transition:opacity .4s ease}
@@ -200,12 +203,12 @@ body.intro-active{overflow:hidden;height:100vh}
 </section>
 
 <section class="story-section">
-  <p class="sec-eyebrow">Depuis le début</p>
-  <h2 class="sec-title">Notre histoire</h2>
+  <p class="sec-eyebrow reveal">Depuis le début</p>
+  <h2 class="sec-title reveal">Notre histoire</h2>
   <div class="sec-rule"></div>
   <div class="story-grid">
     <div class="timeline">
-      <div class="timeline-item">
+      <div class="timeline-item reveal">
         <div class="timeline-year">2024</div>
         <div class="timeline-content">
           <h3>La rencontre</h3>
@@ -217,7 +220,7 @@ body.intro-active{overflow:hidden;height:100vh}
           <p class="starter-caption">Édition limitée · deux pièces, une seule collection</p>
         </div>
       </div>
-      <div class="timeline-item">
+      <div class="timeline-item reveal">
         <div class="timeline-year">2025</div>
         <div class="timeline-content">
           <h3>Nos aventures</h3>
@@ -255,7 +258,7 @@ body.intro-active{overflow:hidden;height:100vh}
           </div>
         </div>
       </div>
-      <div class="timeline-item">
+      <div class="timeline-item reveal">
         <div class="timeline-year">2025</div>
         <div class="timeline-content">
           <h3>La demande</h3>
@@ -267,7 +270,7 @@ body.intro-active{overflow:hidden;height:100vh}
           </div>
         </div>
       </div>
-      <div class="timeline-item">
+      <div class="timeline-item reveal">
         <div class="timeline-year">2027</div>
         <div class="timeline-content">
           <h3>Notre mariage</h3>
@@ -312,14 +315,20 @@ setInterval(updateCountdown,60000);
 
   function radius(){return window.innerWidth<=460?110:(window.innerWidth<=760?150:280);}
 
-  function render(){
+  function render(animate){
     const r=radius();
     photos.forEach((el,i)=>{
       const rel=(i-step+N)%N;
       const theta=(-90+rel*(360/N))*Math.PI/180;
       const x=r*Math.cos(theta);
       const y=r*Math.sin(theta);
-      el.style.transform=`translate(${x}px, ${y}px)`;
+      if(animate && window.gsap){
+        gsap.to(el,{x:x,y:y,duration:2.2,ease:'power3.inOut'});
+      }else if(window.gsap){
+        gsap.set(el,{x:x,y:y});
+      }else{
+        el.style.transform=`translate(${x}px, ${y}px)`;
+      }
       el.classList.toggle('active',rel===0);
     });
   }
@@ -334,15 +343,15 @@ setInterval(updateCountdown,60000);
     },350);
   }
 
-  render();
+  render(false);
   if(!reduced){
     setInterval(()=>{
       step=(step+1)%N;
-      render();
+      render(true);
       updateCaption();
     },4000);
   }
-  window.addEventListener('resize',render);
+  window.addEventListener('resize',()=>render(false));
 })();
 
 /* INTRO CINEMATIC */
@@ -392,5 +401,6 @@ setInterval(updateCountdown,60000);
   skip.addEventListener('click',skipIntro);
 })();
 </script>
+<script src="modern.js"></script>
 </body>
 </html>
