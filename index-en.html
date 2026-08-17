@@ -175,17 +175,23 @@ body.intro-active{overflow:hidden;height:100vh}
 
 <nav>
   <a href="index-en.html" class="nav-logo">Pauline &amp; Damien</a>
-  <ul class="nav-links">
-    <li><a href="index-en.html" class="active">Home</a></li>
-    <li><a href="infos-en.html">Info &amp; RSVP</a></li>
-    <li><a href="cagnotte-en.html">Gift Fund</a></li>
-    <li><a href="souvenirs-en.html">Memories</a></li>
-  </ul>
-  <div class="lang-switch">
-    <a href="index.html" aria-label="Français" title="Français">🇫🇷</a>
-    <a href="index-en.html" class="active" aria-label="English" title="English">🇬🇧</a>
+  <button type="button" class="nav-toggle" id="navToggle" aria-label="Menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+  <div class="nav-menu" id="navMenu">
+    <ul class="nav-links">
+      <li><a href="index-en.html" class="active">Home</a></li>
+      <li><a href="infos-en.html">Info &amp; RSVP</a></li>
+      <li><a href="cagnotte-en.html">Gift Fund</a></li>
+      <li><a href="souvenirs-en.html">Memories</a></li>
+    </ul>
+    <div class="lang-switch">
+      <a href="index.html" aria-label="Français" title="Français">🇫🇷</a>
+      <a href="index-en.html" class="active" aria-label="English" title="English">🇬🇧</a>
+    </div>
   </div>
 </nav>
+<div class="nav-backdrop" id="navBackdrop"></div>
 
 <section class="story-hero">
   <div class="orbit-wrap">
