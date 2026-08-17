@@ -16,3 +16,9 @@ body.page-leaving{opacity:0}
 
 figure img,.orbit-photo img{transition:transform .5s cubic-bezier(.22,1,.36,1)}
 figure:hover img{transform:scale(1.045)}
+
+/* Language switcher */
+.lang-switch{display:flex;align-items:center;gap:.6rem}
+.lang-switch a{font-size:19px;line-height:1;text-decoration:none;opacity:.4;filter:grayscale(55%);transition:opacity .2s ease,filter .2s ease,transform .2s ease}
+.lang-switch a:hover{opacity:.85;transform:translateY(-1px)}
+.lang-switch a.active{opacity:1;filter:none;cursor:default}

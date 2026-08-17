@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Souvenirs — Pauline & Damien</title>
+<title>Memories — Pauline & Damien</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=IM+Fell+French+Canon+SC&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
@@ -82,41 +82,41 @@ footer p{font-size:12px;color:var(--ink-s);line-height:1.9}
 <body>
 
 <nav>
-  <a href="index.html" class="nav-logo">Pauline &amp; Damien</a>
+  <a href="index-en.html" class="nav-logo">Pauline &amp; Damien</a>
   <ul class="nav-links">
-    <li><a href="index.html">Accueil</a></li>
-    <li><a href="infos.html">Infos & RSVP</a></li>
-    <li><a href="cagnotte.html">Cagnotte</a></li>
-    <li><a href="souvenirs.html" class="active">Souvenirs</a></li>
+    <li><a href="index-en.html">Home</a></li>
+    <li><a href="infos-en.html">Info & RSVP</a></li>
+    <li><a href="cagnotte-en.html">Gift Fund</a></li>
+    <li><a href="souvenirs-en.html" class="active">Memories</a></li>
   </ul>
   <div class="lang-switch">
-    <a href="souvenirs.html" class="active" aria-label="Français" title="Français">🇫🇷</a>
-    <a href="souvenirs-en.html" aria-label="English" title="English">🇬🇧</a>
+    <a href="souvenirs.html" aria-label="Français" title="Français">🇫🇷</a>
+    <a href="souvenirs-en.html" class="active" aria-label="English" title="English">🇬🇧</a>
   </div>
 </nav>
 
 <div class="page-header">
-  <p class="page-eyebrow">Vos souvenirs</p>
-  <h1 class="page-title">Souvenirs</h1>
-  <p class="page-intro">Partagez vos plus belles photos de nous, d'eux, de tous ! Elles apparaîtront ici, pour que tout le monde en profite.</p>
+  <p class="page-eyebrow">Your memories</p>
+  <h1 class="page-title">Memories</h1>
+  <p class="page-intro">Share your favorite photos of us, of them, of everyone! They'll appear here for all to enjoy.</p>
   <div class="page-rule"></div>
 </div>
 
 <div class="content">
 
   <div class="upload-card reveal">
-    <h2>Ajouter des photos</h2>
-    <p>Sélectionnez une ou plusieurs photos depuis votre téléphone ou ordinateur, puis envoyez-les. Elles apparaissent ensuite dans la galerie ci-dessous.</p>
+    <h2>Add photos</h2>
+    <p>Select one or more photos from your phone or computer, then send them. They'll appear in the gallery below.</p>
     <input type="file" id="fileInput" accept="image/*" multiple style="display:none" onchange="onFilesChosen()">
-    <button type="button" class="btn-upload" id="chooseBtn" onclick="document.getElementById('fileInput').click()">Choisir des photos</button>
-    <p class="upload-note" id="uploadStatus">JPEG / PNG / HEIC · 15 Mo max par photo</p>
+    <button type="button" class="btn-upload" id="chooseBtn" onclick="document.getElementById('fileInput').click()">Choose photos</button>
+    <p class="upload-note" id="uploadStatus">JPEG / PNG / HEIC · 15 MB max per photo</p>
   </div>
 
   <div class="gallery-header reveal">
-    <h2>La galerie</h2>
-    <button class="btn-refresh" id="refreshBtn" onclick="loadPhotos()">Actualiser</button>
+    <h2>The Gallery</h2>
+    <button class="btn-refresh" id="refreshBtn" onclick="loadPhotos()">Refresh</button>
   </div>
-  <div id="galleryState" class="gallery-state">Chargement des souvenirs…</div>
+  <div id="galleryState" class="gallery-state">Loading memories…</div>
   <div class="gallery-grid" id="galleryGrid"></div>
 
 </div>
@@ -128,18 +128,15 @@ footer p{font-size:12px;color:var(--ink-s);line-height:1.9}
 
 <footer>
   <div class="footer-crest"><img src="Pauline et Damien logo mariage.png" alt="Pauline &amp; Damien"></div>
-  <p>20 octobre 2027 · Château de Roquefoulet · Montgeard</p>
-  <p>Questions : <span style="color:var(--sage)"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="016c607368606664417160746d686f642c64752c65606c68646f2f6773">[email&#160;protected]</a></span></p>
+  <p>October 20, 2027 · Château de Roquefoulet · Montgeard, France</p>
+  <p>Questions: <span style="color:var(--sage)"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="016c607368606664417160746d686f642c64752c65606c68646f2f6773">[email&#160;protected]</a></span></p>
 </footer>
 
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 /* ─────────────────────────────────────────────────────────────
-   Souvenirs ↔ Google Drive (un seul script gère la liste + l'envoi)
-   1. Ouvrez le fichier "google-apps-script-souvenirs.gs" fourni.
-   2. Suivez les étapes (créer le dossier Drive privé, coller le script, déployer).
-   3. Collez ci-dessous l'URL de déploiement (se terminant par /exec) :
+   Memories ↔ Google Drive (shares the same backend as the French page)
    ───────────────────────────────────────────────────────────── */
-const PHOTOS_ENDPOINT = "https://script.google.com/macros/s/AKfycbz0RxqYhqFOVnPldjhZQpxDqFd2v1VON5kCNEbj3gT6NIooIgrbnzH9HaqL9GRR2XCH/exec"; // ← collez ici votre URL Apps Script /exec (sert aussi à l'envoi)
+const PHOTOS_ENDPOINT = "https://script.google.com/macros/s/AKfycbz0RxqYhqFOVnPldjhZQpxDqFd2v1VON5kCNEbj3gT6NIooIgrbnzH9HaqL9GRR2XCH/exec";
 
 let chosenFiles = [];
 
@@ -149,7 +146,7 @@ function onFilesChosen(){
   const status = document.getElementById('uploadStatus');
   const btn = document.getElementById('chooseBtn');
   if(chosenFiles.length === 0) return;
-  btn.textContent = 'Envoyer ' + chosenFiles.length + (chosenFiles.length>1?' photos':' photo');
+  btn.textContent = 'Send ' + chosenFiles.length + (chosenFiles.length>1?' photos':' photo');
   btn.onclick = uploadChosenFiles;
   status.textContent = chosenFiles.map(f=>f.name).join(', ');
 }
@@ -165,7 +162,7 @@ function fileToBase64(file){
 
 async function uploadChosenFiles(){
   if(!PHOTOS_ENDPOINT){
-    alert("L'envoi n'est pas encore configuré. Voir google-apps-script-souvenirs.gs");
+    alert("Uploading isn't configured yet. See google-apps-script-souvenirs.gs");
     return;
   }
   const status = document.getElementById('uploadStatus');
@@ -174,7 +171,7 @@ async function uploadChosenFiles(){
 
   for(let i=0;i<chosenFiles.length;i++){
     const file = chosenFiles[i];
-    status.textContent = `Envoi ${i+1}/${chosenFiles.length} — ${file.name}…`;
+    status.textContent = `Sending ${i+1}/${chosenFiles.length} — ${file.name}…`;
     try{
       const dataBase64 = await fileToBase64(file);
       await fetch(PHOTOS_ENDPOINT, {
@@ -184,12 +181,12 @@ async function uploadChosenFiles(){
         body: JSON.stringify({ name: file.name, mimeType: file.type, dataBase64 })
       });
     }catch(err){
-      console.error('Échec envoi', file.name, err);
+      console.error('Upload failed', file.name, err);
     }
   }
 
-  status.textContent = 'Merci ! Vos photos ont été envoyées 🎉';
-  btn.textContent = 'Choisir des photos';
+  status.textContent = 'Thank you! Your photos have been sent 🎉';
+  btn.textContent = 'Choose photos';
   btn.onclick = () => document.getElementById('fileInput').click();
   btn.disabled = false;
   chosenFiles = [];
@@ -205,14 +202,14 @@ async function loadPhotos(){
 
   if(!PHOTOS_ENDPOINT){
     state.style.display = 'block';
-    state.innerHTML = "La galerie n'est pas encore connectée.<br>Suivez les instructions dans <em>google-apps-script-souvenirs.gs</em> pour l'activer.";
+    state.innerHTML = "The gallery isn't connected yet.<br>Follow the instructions in <em>google-apps-script-souvenirs.gs</em> to enable it.";
     grid.innerHTML = '';
     btn.disabled = false;
     return;
   }
 
   state.style.display = 'block';
-  state.textContent = 'Chargement des souvenirs…';
+  state.textContent = 'Loading memories…';
   grid.innerHTML = '';
 
   try{
@@ -220,7 +217,7 @@ async function loadPhotos(){
     const photos = await res.json();
 
     if(!Array.isArray(photos) || photos.length === 0){
-      state.innerHTML = "Aucune photo pour le moment.<br>Soyez le·la premier·ère à en ajouter !";
+      state.innerHTML = "No photos yet.<br>Be the first to add one!";
       btn.disabled = false;
       return;
     }
@@ -228,13 +225,13 @@ async function loadPhotos(){
     state.style.display = 'none';
     grid.innerHTML = photos.map(p => `
       <figure>
-        <img src="${p.url}" alt="${(p.name||'Souvenir').replace(/"/g,'&quot;')}" loading="lazy" onclick="openLightbox('${p.url}')">
+        <img src="${p.url}" alt="${(p.name||'Memory').replace(/"/g,'&quot;')}" loading="lazy" onclick="openLightbox('${p.url}')">
       </figure>
     `).join('');
 
   }catch(err){
     console.error(err);
-    state.innerHTML = "Impossible de charger les photos pour le moment.<br>Réessayez dans un instant.";
+    state.innerHTML = "Unable to load photos right now.<br>Please try again in a moment.";
   }
   btn.disabled = false;
 }
