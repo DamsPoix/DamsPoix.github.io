@@ -52,6 +52,16 @@ document.addEventListener('DOMContentLoaded', function(){
         scrollTrigger:{trigger:el, start:'top 88%'}
       });
     });
+
+    var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if(!reducedMotion){
+      gsap.utils.toArray('.parallax-img').forEach(function(img){
+        gsap.fromTo(img, {yPercent:-14}, {
+          yPercent:14, ease:'none',
+          scrollTrigger:{trigger:img.parentElement, start:'top bottom', end:'bottom top', scrub:true}
+        });
+      });
+    }
   } else {
     document.querySelectorAll('.reveal').forEach(function(el){ el.classList.add('reveal-ready'); });
   }

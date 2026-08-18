@@ -92,7 +92,7 @@ nav{display:flex;justify-content:space-between;align-items:center;gap:.75rem 1.5
 
 /* LIEU */
 .lieu-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-bottom:3.5rem}
-.lieu-photo{width:100%;height:320px;object-fit:cover;border-radius:8px;border:1px solid var(--border);margin-bottom:1.5rem;display:block}
+.lieu-photo{width:100%;height:320px;border-radius:8px;border:1px solid var(--border);margin-bottom:1.5rem}
 @media(max-width:580px){.lieu-photo{height:220px}}
 @media(max-width:580px){.lieu-grid{grid-template-columns:1fr}}
 .lieu-card{background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:1.5rem;border-top:2px solid var(--sage)}
@@ -242,7 +242,9 @@ footer p{font-size:12px;color:var(--ink-s);line-height:1.9}
   <p class="sec-eyebrow">Where to find us</p>
   <h2 class="sec-title reveal">The Venue</h2>
   <div class="sec-rule"></div>
-  <img class="lieu-photo reveal" src="chateau-roquefoulet.jpeg" alt="Château de Roquefoulet lit up at night">
+  <div class="lieu-photo parallax-frame reveal">
+    <img class="parallax-img" src="chateau-roquefoulet.jpeg" alt="Château de Roquefoulet lit up at night">
+  </div>
   <div class="lieu-grid">
     <div class="lieu-card reveal">
       <h3>Address</h3>
