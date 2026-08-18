@@ -34,6 +34,7 @@ figure:hover img{transform:scale(1.045)}
 body.nav-open{overflow:hidden}
 
 @media(max-width:680px){
+  nav{justify-content:space-between !important;text-align:left !important}
   .nav-toggle{display:flex}
   .nav-menu{position:fixed;top:0;right:0;height:100vh;width:min(78vw,320px);background:var(--bg);box-shadow:-10px 0 34px rgba(28,22,12,.18);display:flex;flex-direction:column;align-items:flex-start;justify-content:center;gap:2.25rem;padding:2rem 2.25rem;transform:translateX(100%);transition:transform .4s cubic-bezier(.22,1,.36,1);z-index:200}
   .nav-menu.open{transform:translateX(0)}
