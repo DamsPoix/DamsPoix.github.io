@@ -130,6 +130,9 @@ nav{display:flex;justify-content:space-between;align-items:center;gap:.75rem 1.5
 .fg textarea{resize:vertical;min-height:80px}
 .btn-submit{background:var(--orange);color:#fff;border:none;padding:.85rem 2rem;border-radius:6px;font-size:11px;letter-spacing:.18em;text-transform:uppercase;cursor:pointer;width:100%;font-family:'Jost',sans-serif;margin-top:.5rem;transition:background .2s}
 .btn-submit:hover{background:var(--orange-l)}
+.field-error{display:block;font-size:11px;color:#b3261e;margin-top:.3rem;min-height:14px}
+.fg input.invalid{border-color:#b3261e}
+.form-error{font-size:12.5px;color:#b3261e;text-align:center;margin:0 0 .75rem}
 .rsvp-success{display:none;text-align:center;padding:2.5rem 1rem}
 .rsvp-success h3{font-family:'Great Vibes',cursive;font-size:2.5rem;color:var(--sage);margin-bottom:.5rem}
 .rsvp-success p{font-size:13px;color:var(--ink-s)}
@@ -303,10 +306,10 @@ footer p{font-size:12px;color:var(--ink-s);line-height:1.9}
   <p style="font-size:13px;color:var(--ink-s);margin-bottom:1.5rem">Merci de répondre avant le <strong style="color:var(--ink-m)">31 décembre 2026</strong>. Pour toute question : <a href="/cdn-cgi/l/email-protection#d8b5b9aab1b9bfbd98a8b9adb4b1b6bdf5bdacf5bcb9b5b1bdb6f6beaa" style="color:var(--sage)"><span class="__cf_email__" data-cfemail="84e9e5f6ede5e3e1c4f4e5f1e8edeae1a9e1f0a9e0e5e9ede1eaaae2f6">[email&#160;protected]</span></a></p>
   <div class="rsvp-wrap reveal" id="rsvpWrap">
     <div class="form-grid" style="margin-bottom:0">
-      <div class="fg"><label>Prénom *</label><input type="text" id="prenom" placeholder="Marie"></div>
+      <div class="fg"><label>Prénom *</label><input type="text" id="prenom" placeholder="Marie"><span class="field-error" id="prenomError"></span></div>
       <div class="fg"><label>Nom *</label><input type="text" id="nom" placeholder="Dupont"></div>
     </div>
-    <div class="fg"><label>Email *</label><input type="email" id="email" placeholder="marie@email.com"></div>
+    <div class="fg"><label>Email *</label><input type="email" id="email" placeholder="marie@email.com"><span class="field-error" id="emailError"></span></div>
     <div class="form-grid" style="margin-bottom:0">
       <div class="fg">
         <label>Présence</label>
@@ -347,6 +350,7 @@ footer p{font-size:12px;color:var(--ink-s);line-height:1.9}
       <label>Un mot pour les mariés (optionnel)</label>
       <textarea id="message" placeholder="Une chanson à demander, un souvenir partagé, une chanson favorite..."></textarea>
     </div>
+    <p class="form-error" id="formError" style="display:none"></p>
     <button class="btn-submit" onclick="submitRSVP()">Confirmer ma présence</button>
   </div>
   <div class="rsvp-success" id="rsvpSuccess">
@@ -371,13 +375,51 @@ footer p{font-size:12px;color:var(--ink-s);line-height:1.9}
    ───────────────────────────────────────────────────────────── */
 const SHEET_ENDPOINT = "https://script.google.com/macros/s/AKfycbzCW0rthYLLd22UfgKn3KnelWA8jd7qjN37Twn7C0-U-gNCJntzLu3640xlZ4LyUD6fpg/exec"; // ← collez ici votre URL Apps Script /exec
 
+function isValidEmail(email){
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+}
+function clearRsvpErrors(){
+  ['prenom','email'].forEach(id=>{
+    const input = document.getElementById(id);
+    const err = document.getElementById(id+'Error');
+    if(input) input.classList.remove('invalid');
+    if(err) err.textContent = '';
+  });
+  const formErr = document.getElementById('formError');
+  if(formErr){ formErr.style.display = 'none'; formErr.textContent = ''; }
+}
+function showFieldError(id, msg){
+  const input = document.getElementById(id);
+  const err = document.getElementById(id+'Error');
+  if(input) input.classList.add('invalid');
+  if(err) err.textContent = msg;
+}
+function showFormError(msg){
+  const formErr = document.getElementById('formError');
+  if(formErr){ formErr.textContent = msg; formErr.style.display = 'block'; }
+}
+['prenom','email'].forEach(id=>{
+  const input = document.getElementById(id);
+  if(input) input.addEventListener('input', function(){
+    input.classList.remove('invalid');
+    const err = document.getElementById(id+'Error');
+    if(err) err.textContent = '';
+  });
+});
+
 async function submitRSVP(){
   const get = id => (document.getElementById(id)?.value || '').trim();
   const prenom  = get('prenom');
   const nom     = get('nom');
   const email   = get('email');
-  if(!prenom || !email){
-    alert('Merci de remplir au moins votre prénom et votre email.');
+
+  clearRsvpErrors();
+  let hasError = false;
+  if(!prenom){ showFieldError('prenom', 'Merci d\'indiquer votre prénom.'); hasError = true; }
+  if(!email){ showFieldError('email', 'Merci d\'indiquer votre email.'); hasError = true; }
+  else if(!isValidEmail(email)){ showFieldError('email', 'Cet email ne semble pas valide.'); hasError = true; }
+  if(hasError){
+    document.getElementById(!prenom ? 'prenom' : 'email').focus();
     return;
   }
   const enfants = get('enfants');
@@ -421,7 +463,7 @@ async function submitRSVP(){
     console.error(err);
     btn.disabled = false;
     btn.textContent = label;
-    alert("Une erreur est survenue lors de l'envoi. Merci de réessayer, ou de nous écrire à mariage@pauline-et-damien.fr");
+    showFormError("Une erreur est survenue lors de l'envoi. Merci de réessayer, ou de nous écrire à mariage@pauline-et-damien.fr");
   }
 }
 
