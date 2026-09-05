@@ -531,20 +531,22 @@ function toggleEnfantsNb(){
   if(reducedMotion) return;
 
   var BOAT_W = 48;
-  var EDGE_PAD = 8;
   var riverSvg = track.querySelector('.voyage-river-line');
 
   function buildAnchors(){
     var trackRect = track.getBoundingClientRect();
-    var leftX = EDGE_PAD;
-    var rightX = trackRect.width - EDGE_PAD - BOAT_W;
-    var dayX = [leftX, rightX, leftX];
-    var days = track.querySelectorAll('.prog-day');
+    var blocks = track.querySelectorAll('.prog-block');
     var anchors = [];
-    days.forEach(function(day, i){
-      var r = day.getBoundingClientRect();
+    blocks.forEach(function(block){
+      var day = block.querySelector('.prog-day');
+      var blockRect = block.getBoundingClientRect();
+      var isRight = block.classList.contains('prog-block--right');
+      var x = isRight
+        ? (blockRect.right - trackRect.left - BOAT_W)
+        : (blockRect.left - trackRect.left);
+      var r = (day || block).getBoundingClientRect();
       var y = (r.top - trackRect.top) + r.height / 2;
-      anchors.push({ x: dayX[i % dayX.length], y: y });
+      anchors.push({ x: x, y: y });
     });
     return anchors;
   }
@@ -586,6 +588,7 @@ function toggleEnfantsNb(){
   function drawRiver(){
     if(!livePath) return;
     var trackRect = track.getBoundingClientRect();
+    if(trackRect.width < 50) return;
     riverSvg.setAttribute('width', trackRect.width);
     riverSvg.setAttribute('height', trackRect.height);
     riverSvg.setAttribute('viewBox', '0 0 ' + trackRect.width.toFixed(1) + ' ' + trackRect.height.toFixed(1));
@@ -603,22 +606,36 @@ function toggleEnfantsNb(){
     segments = segmentsFromAnchors(anchors);
     drawRiver();
   }
-  window.addEventListener('resize', rebuild);
+  window.addEventListener('resize', function(){ rebuildAndRefresh(); });
 
-  ScrollTrigger.create({
+  function rebuildAndRefresh(){
+    rebuild();
+    if(window.ScrollTrigger) ScrollTrigger.refresh();
+    if(scrollTriggerInstance) updateBoat(scrollTriggerInstance);
+  }
+  if(document.fonts && document.fonts.ready){ document.fonts.ready.then(rebuildAndRefresh); }
+  window.addEventListener('load', rebuildAndRefresh);
+  [150,400,800,1500].forEach(function(d){ setTimeout(rebuildAndRefresh, d); });
+
+  function updateBoat(self){
+    var len = livePath.getTotalLength();
+    if(!len) return;
+    var boatH = boat.getBoundingClientRect().height;
+    var pt = livePath.getPointAtLength(len * self.progress);
+    livePath.style.strokeDashoffset = len * (1 - self.progress);
+    boat.style.top = (pt.y - boatH / 2) + 'px';
+    boat.style.left = pt.x + 'px';
+    if(pulse){ pulse.setAttribute('cx', pt.x); pulse.setAttribute('cy', pt.y); }
+  }
+
+  var scrollTriggerInstance = ScrollTrigger.create({
     trigger: track,
-    start: 'top 75%',
-    end: 'bottom 55%',
+    start: 'top top',
+    end: 'bottom bottom',
     scrub: true,
-    onUpdate: function(self){
-      var boatH = boat.getBoundingClientRect().height;
-      var pt = livePath.getPointAtLength(pathLen * self.progress);
-      livePath.style.strokeDashoffset = pathLen * (1 - self.progress);
-      boat.style.top = (pt.y - boatH / 2) + 'px';
-      boat.style.left = pt.x + 'px';
-      if(pulse){ pulse.setAttribute('cx', pt.x); pulse.setAttribute('cy', pt.y); }
-    }
+    onUpdate: updateBoat
   });
+  updateBoat(scrollTriggerInstance);
 })();
 </script>
 </body>
