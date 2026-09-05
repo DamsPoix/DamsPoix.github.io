@@ -45,17 +45,20 @@ nav{display:flex;justify-content:space-between;align-items:center;gap:.75rem 1.5
 .nav-links a:hover,.nav-links a.active{color:var(--orange)}
 
 /* PAGE HEADER */
-.page-header{padding:4rem 3rem 3rem;text-align:center;max-width:700px;margin:0 auto}
-@media(max-width:600px){.page-header{padding:2.5rem 1.5rem 2rem}}
+.page-header{text-align:center;max-width:700px;margin:0 auto}
 .page-eyebrow{font-size:11px;letter-spacing:.25em;text-transform:uppercase;color:var(--orange);margin-bottom:.5rem}
 .page-title{font-family:'Great Vibes',cursive;font-size:clamp(3rem,6vw,4.5rem);color:var(--sage);line-height:1.15}
 .page-rule{width:40px;height:1px;background:var(--border);margin:1rem auto 0}
 
 /* VOYAGE DECOR (explorer journey styling) */
-.voyage-frame{position:relative;border:1px solid var(--border);border-radius:4px;overflow:visible}
-.voyage-frame::before,.voyage-frame::after{content:'';position:absolute;width:clamp(64px,14vw,120px);height:clamp(64px,14vw,120px);background:no-repeat center/contain;pointer-events:none}
+.voyage-frame{position:relative;overflow:visible}
+.voyage-frame::before,.voyage-frame::after{content:'';position:absolute;width:clamp(64px,14vw,120px);height:clamp(64px,14vw,120px);background:no-repeat center/contain;pointer-events:none;z-index:1}
 .voyage-frame::before{top:-16px;left:-12px;background-image:url('deco/bouquet-1.webp')}
 .voyage-frame::after{bottom:-16px;right:-12px;background-image:url('deco/bouquet-2.webp');transform:scaleX(-1)}
+.voyage-paper{position:relative;background:radial-gradient(ellipse at 15% 18%,rgba(184,143,70,.18) 0%,transparent 46%),radial-gradient(ellipse at 85% 78%,rgba(156,63,40,.12) 0%,transparent 50%),radial-gradient(ellipse at 55% 95%,rgba(107,84,58,.12) 0%,transparent 42%),radial-gradient(ellipse at 8% 88%,rgba(107,84,58,.1) 0%,transparent 36%),var(--bg);border:1px solid var(--border);clip-path:polygon(0% -.14%,16.67% .25%,33.33% 2.1%,50% -.18%,66.67% .04%,83.33% .36%,100% -.9%,100.03% 0%,100.54% 16.67%,101.45% 33.33%,97.89% 50%,99.03% 66.67%,98.3% 83.33%,100.89% 100%,100% 100.55%,83.33% 98.09%,66.67% 102.38%,50% 102.42%,33.33% 100.76%,16.67% 100.48%,0% 99.02%,-1.39% 100%,.12% 83.33%,-2.18% 66.67%,-1.61% 50%,-1.27% 33.33%,-1.95% 16.67%,-.1% 0%)}
+.page-header .voyage-paper{padding:4rem 3rem 3rem}
+@media(max-width:600px){.page-header .voyage-paper{padding:2.5rem 1.5rem 2rem}}
+.rsvp-wrap .voyage-paper{padding:2.5rem;border-top:2px solid var(--orange)}
 .star-mark{width:20px;height:20px;margin:0 auto .6rem;opacity:.85;background:no-repeat center/contain url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23b3892f' d='M12 0C12 6 14 10 24 12C14 14 12 18 12 24C12 18 10 14 0 12C10 10 12 6 12 0Z'/%3E%3C/svg%3E")}
 .voyage-compass{display:flex;justify-content:center;margin:0 0 2rem}
 .voyage-compass svg{width:60px;height:60px}
@@ -122,8 +125,8 @@ nav{display:flex;justify-content:space-between;align-items:center;gap:.75rem 1.5
 .dress-box p{font-size:13.5px;color:var(--ink-m);line-height:1.8}
 
 /* RSVP FORM */
-.rsvp-wrap{position:relative;overflow:visible;background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:2.5rem;border-top:2px solid var(--orange)}
-.rsvp-wrap::before{content:'';position:absolute;bottom:-16px;left:-16px;width:clamp(76px,16vw,128px);height:clamp(76px,16vw,128px);background:url('deco/bouquet-2.webp') no-repeat center/contain;pointer-events:none;z-index:-1}
+.rsvp-wrap{position:relative;overflow:visible}
+.rsvp-wrap::before{content:'';position:absolute;bottom:-16px;left:-16px;width:clamp(76px,16vw,128px);height:clamp(76px,16vw,128px);background:url('deco/bouquet-2.webp') no-repeat center/contain;pointer-events:none;z-index:2}
 .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
 @media(max-width:500px){.form-grid{grid-template-columns:1fr}}
 .fg{display:flex;flex-direction:column;gap:.35rem;margin-bottom:.9rem}
@@ -171,10 +174,12 @@ footer p{font-size:12px;color:var(--ink-s);line-height:1.9}
 <div class="nav-backdrop" id="navBackdrop"></div>
 
 <div class="page-header voyage-frame">
-  <div class="star-mark" aria-hidden="true"></div>
-  <p class="page-eyebrow">October 20, 2027</p>
-  <h1 class="page-title" style="font-family: 'Cormorant Garamond'">Info & RSVP</h1>
-  <div class="page-rule"></div>
+  <div class="voyage-paper">
+    <div class="star-mark" aria-hidden="true"></div>
+    <p class="page-eyebrow">October 20, 2027</p>
+    <h1 class="page-title" style="font-family: 'Cormorant Garamond'">Info & RSVP</h1>
+    <div class="page-rule"></div>
+  </div>
 </div>
 
 <div class="content">
@@ -330,6 +335,7 @@ footer p{font-size:12px;color:var(--ink-s);line-height:1.9}
   <p style="font-size:13px;color:var(--ink-s);margin-bottom:1.5rem">Please reply by <strong style="color:var(--ink-m)">December 31, 2026</strong>. For any questions: <a href="/cdn-cgi/l/email-protection#d8b5b9aab1b9bfbd98a8b9adb4b1b6bdf5bdacf5bcb9b5b1bdb6f6beaa" style="color:var(--sage)"><span class="__cf_email__" data-cfemail="84e9e5f6ede5e3e1c4f4e5f1e8edeae1a9e1f0a9e0e5e9ede1eaaae2f6">[email&#160;protected]</span></a></p>
   <div class="voyage-divider" aria-hidden="true"><img src="deco/feuilles-1.webp" alt=""></div>
   <div class="rsvp-wrap reveal" id="rsvpWrap">
+   <div class="voyage-paper">
     <div class="form-grid" style="margin-bottom:0">
       <div class="fg"><label>First name *</label><input type="text" id="prenom" placeholder="Jane"><span class="field-error" id="prenomError"></span></div>
       <div class="fg"><label>Last name *</label><input type="text" id="nom" placeholder="Smith"></div>
@@ -377,6 +383,7 @@ footer p{font-size:12px;color:var(--ink-s);line-height:1.9}
     </div>
     <p class="form-error" id="formError" style="display:none"></p>
     <button class="btn-submit" onclick="submitRSVP()">Confirm my attendance</button>
+   </div>
   </div>
   <div class="rsvp-success" id="rsvpSuccess">
     <h3>Thank you!</h3>
@@ -504,14 +511,54 @@ function toggleEnfantsNb(){
   gsap.registerPlugin(ScrollTrigger);
   var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   if(reducedMotion) return;
+
+  var LEFT_A = -26, LEFT_B = -2, LEFT_MID = (LEFT_A + LEFT_B) / 2;
+
+  function buildAnchors(){
+    var trackRect = track.getBoundingClientRect();
+    var items = track.querySelectorAll('.prog-item');
+    var rows = [];
+    items.forEach(function(item){
+      var r = item.getBoundingClientRect();
+      var top = Math.round(r.top - trackRect.top);
+      var mid = top + r.height / 2;
+      var row = rows.find(function(row){ return Math.abs(row.top - top) < 10; });
+      if(!row) rows.push({ top: top, mid: mid });
+    });
+    rows.sort(function(a, b){ return a.top - b.top; });
+    var anchors = [{ y: 0, x: LEFT_MID }];
+    rows.forEach(function(row, i){
+      anchors.push({ y: row.mid, x: (i % 2 === 0) ? LEFT_A : LEFT_B });
+    });
+    anchors.push({ y: trackRect.height, x: LEFT_MID });
+    return anchors;
+  }
+
+  var anchors = buildAnchors();
+  window.addEventListener('resize', function(){ anchors = buildAnchors(); });
+
+  function xForY(y){
+    for(var i = 0; i < anchors.length - 1; i++){
+      var a = anchors[i], b = anchors[i+1];
+      if(y >= a.y && y <= b.y){
+        var t = (b.y - a.y) === 0 ? 0 : (y - a.y) / (b.y - a.y);
+        return a.x + (b.x - a.x) * t;
+      }
+    }
+    return anchors[anchors.length - 1].x;
+  }
+
   ScrollTrigger.create({
     trigger: track,
     start: 'top 75%',
     end: 'bottom 55%',
     scrub: true,
     onUpdate: function(self){
-      var max = track.getBoundingClientRect().height - boat.getBoundingClientRect().height;
-      boat.style.top = (self.progress * max) + 'px';
+      var boatH = boat.getBoundingClientRect().height;
+      var max = track.getBoundingClientRect().height - boatH;
+      var y = self.progress * max;
+      boat.style.top = y + 'px';
+      boat.style.left = xForY(y + boatH / 2) + 'px';
     }
   });
 })();

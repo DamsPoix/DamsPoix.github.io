@@ -2,7 +2,7 @@
 
 /* Explorer's map accents (Jules Verne inspired) */
 body{position:relative}
-body::before{content:'';position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.05;mix-blend-mode:multiply;background-image:radial-gradient(ellipse at 20% 15%,rgba(58,42,24,.5) 0%,transparent 55%),radial-gradient(ellipse at 85% 90%,rgba(58,42,24,.45) 0%,transparent 55%),repeating-linear-gradient(115deg,rgba(58,42,24,.5) 0px,rgba(58,42,24,.5) 1px,transparent 1px,transparent 3px)}
+body::before{content:'';position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.11;mix-blend-mode:multiply;background-image:radial-gradient(ellipse at 12% 10%,rgba(58,42,24,.55) 0%,transparent 42%),radial-gradient(ellipse at 88% 92%,rgba(58,42,24,.5) 0%,transparent 46%),radial-gradient(ellipse at 78% 15%,rgba(107,84,58,.4) 0%,transparent 38%),radial-gradient(ellipse at 18% 85%,rgba(107,84,58,.4) 0%,transparent 38%),repeating-linear-gradient(115deg,rgba(58,42,24,.5) 0px,rgba(58,42,24,.5) 1px,transparent 1px,transparent 3px)}
 
 .sec-title{position:relative}
 .sec-title::before{content:'';display:block;width:25px;height:25px;margin:0 auto .55rem;opacity:.6;background:no-repeat center/contain url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Cg fill='none' stroke='%23b3892f' stroke-width='1.4'%3E%3Ccircle cx='20' cy='20' r='13'/%3E%3Cpath d='M20 3v6M20 31v6M3 20h6M31 20h6'/%3E%3Cpath fill='%23b3892f' stroke='none' d='M20 10 23 20 20 30 17 20Z'/%3E%3C/g%3E%3C/svg%3E")}
