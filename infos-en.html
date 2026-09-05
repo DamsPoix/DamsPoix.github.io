@@ -65,6 +65,8 @@ nav{display:flex;justify-content:space-between;align-items:center;gap:.75rem 1.5
 .voyage-divider{display:flex;justify-content:center;margin:0 0 1.5rem}
 .voyage-divider img{width:60px;height:auto;opacity:.9}
 .voyage-timeline{position:relative}
+@media(min-width:640px){.voyage-timeline{width:calc(100% + 220px);margin-left:-110px;margin-right:-110px;padding:0 40px}}
+@media(min-width:640px) and (max-width:1000px){.voyage-timeline{width:100%;margin-left:0;margin-right:0;padding:0}}
 @media(min-width:640px){
   .voyage-river-line{position:absolute;left:0;top:0;bottom:0;width:100%;overflow:visible;pointer-events:none;display:block;z-index:4}
   .route-track{fill:none;stroke:var(--border);stroke-width:1.6}
@@ -89,12 +91,16 @@ nav{display:flex;justify-content:space-between;align-items:center;gap:.75rem 1.5
 /* PROGRAMME */
 .programme{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);border:1px solid var(--border);border-radius:8px;overflow:hidden;margin-bottom:2.5rem}
 .prog-day{position:relative;z-index:6;display:flex;align-items:baseline;gap:.85rem;margin:0 0 1rem;background:var(--bg)}
+.prog-day--right{flex-direction:row-reverse;text-align:right}
+.prog-block{max-width:min(58%,620px)}
+.prog-block--right{margin-left:auto}
+@media(max-width:640px){.prog-block{max-width:100%}.prog-block--right{margin-left:0}}
 .prog-day:not(:first-of-type){margin-top:2.5rem}
 .prog-day-name{font-family:'Cormorant Garamond',serif;font-size:1.35rem;font-style:italic;color:var(--sage);white-space:nowrap}
 .prog-day-date{font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--orange);white-space:nowrap}
 .prog-day-line{flex:1;height:1px;background:var(--border)}
 @media(max-width:580px){.programme{grid-template-columns:1fr}}
-.prog-item{background:var(--card);padding:1.5rem 1.75rem;display:flex;gap:1.25rem;align-items:flex-start}
+.prog-item{position:relative;z-index:6;background:var(--card);padding:1.5rem 1.75rem;display:flex;gap:1.25rem;align-items:flex-start}
 .prog-time{font-family:'Cormorant Garamond',serif;font-size:1.1rem;color:var(--orange);font-weight:300;white-space:nowrap;padding-top:.1rem;min-width:52px}
 .prog-content h3{font-family:'Cormorant Garamond',serif;font-size:1rem;font-weight:400;color:var(--sage);margin-bottom:.2rem;letter-spacing:.03em}
 .prog-content p{font-size:12.5px;color:var(--ink-s);line-height:1.65}
@@ -214,6 +220,7 @@ footer p{font-size:12px;color:var(--ink-s);line-height:1.9}
   </svg>
   <img class="voyage-boat" src="deco/bateau.webp" alt="" aria-hidden="true">
 
+  <div class="prog-block">
   <div class="prog-day"><span class="prog-day-name">At the town hall</span><span class="prog-day-date">Tuesday, October 19, 2027</span><span class="prog-day-line"></span></div>
   <div class="programme">
     <div class="prog-item reveal">
@@ -233,8 +240,10 @@ footer p{font-size:12px;color:var(--ink-s);line-height:1.9}
       <div class="prog-content"><h3>Dinner</h3><p>Meal at a restaurant with close family</p></div>
     </div>
   </div>
+  </div>
 
-  <div class="prog-day"><span class="prog-day-name">At the château</span><span class="prog-day-date">Wednesday, October 20, 2027</span><span class="prog-day-line"></span></div>
+  <div class="prog-block prog-block--right">
+  <div class="prog-day prog-day--right"><span class="prog-day-name">At the château</span><span class="prog-day-date">Wednesday, October 20, 2027</span><span class="prog-day-line"></span></div>
   <div class="programme">
     <div class="prog-item reveal">
       <div class="prog-time">2:30 PM</div>
@@ -261,7 +270,9 @@ footer p{font-size:12px;color:var(--ink-s);line-height:1.9}
       <div class="prog-content"><h3>Dinner & Party</h3><p>Seated dinner, live music and dancing</p></div>
     </div>
   </div>
+  </div>
 
+  <div class="prog-block">
   <div class="prog-day"><span class="prog-day-name">The day after</span><span class="prog-day-date">Thursday, October 21, 2027</span><span class="prog-day-line"></span></div>
   <div class="programme">
     <div class="prog-item reveal">
@@ -272,6 +283,7 @@ footer p{font-size:12px;color:var(--ink-s);line-height:1.9}
       <div class="prog-time">3:00 PM</div>
       <div class="prog-content"><h3>Farewell</h3><p>Last hugs and guest departure</p></div>
     </div>
+  </div>
   </div>
   </div>
 
@@ -528,13 +540,12 @@ function toggleEnfantsNb(){
     var rightX = trackRect.width - EDGE_PAD - BOAT_W;
     var dayX = [leftX, rightX, leftX];
     var days = track.querySelectorAll('.prog-day');
-    var anchors = [{ x: leftX, y: 0 }];
+    var anchors = [];
     days.forEach(function(day, i){
       var r = day.getBoundingClientRect();
       var y = (r.top - trackRect.top) + r.height / 2;
       anchors.push({ x: dayX[i % dayX.length], y: y });
     });
-    anchors.push({ x: leftX, y: trackRect.height });
     return anchors;
   }
 
