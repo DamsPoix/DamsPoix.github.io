@@ -535,6 +535,7 @@ function toggleEnfantsNb(){
       var a = anchors[i], b = anchors[i+1];
       if(y >= a.y && y <= b.y){
         var t = (b.y - a.y) === 0 ? 0 : (y - a.y) / (b.y - a.y);
+        t = t*t*(3-2*t);
         return a.x + (b.x - a.x) * t;
       }
     }
