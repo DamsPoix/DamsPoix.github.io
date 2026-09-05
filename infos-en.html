@@ -124,6 +124,10 @@ nav{display:flex;justify-content:space-between;align-items:center;gap:.75rem 1.5
 .dress-box{background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:1.5rem 1.75rem;margin-bottom:3.5rem;border-left:3px solid var(--orange)}
 .dress-box p{font-size:13.5px;color:var(--ink-m);line-height:1.8}
 
+/* Parchment sheet treatment for every framed box on the page */
+.programme,.lieu-card,.hotel-card,.dress-box{border-radius:0;clip-path:polygon(0% -.14%,16.67% .25%,33.33% 2.1%,50% -.18%,66.67% .04%,83.33% .36%,100% -.9%,100.03% 0%,100.54% 16.67%,101.45% 33.33%,97.89% 50%,99.03% 66.67%,98.3% 83.33%,100.89% 100%,100% 100.55%,83.33% 98.09%,66.67% 102.38%,50% 102.42%,33.33% 100.76%,16.67% 100.48%,0% 99.02%,-1.39% 100%,.12% 83.33%,-2.18% 66.67%,-1.61% 50%,-1.27% 33.33%,-1.95% 16.67%,-.1% 0%)}
+.lieu-card,.hotel-card,.dress-box{background:radial-gradient(ellipse at 10% 12%,rgba(184,143,70,.07) 0%,transparent 28%),radial-gradient(ellipse at 90% 88%,rgba(156,63,40,.06) 0%,transparent 28%),#f9f2df;box-shadow:inset 0 0 26px rgba(107,84,58,.13)}
+
 /* RSVP FORM */
 .rsvp-wrap{position:relative;overflow:visible}
 .rsvp-wrap::before{content:'';position:absolute;bottom:-16px;left:-16px;width:clamp(76px,16vw,128px);height:clamp(76px,16vw,128px);background:url('deco/bouquet-2.webp') no-repeat center/contain;pointer-events:none;z-index:2}
