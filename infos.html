@@ -99,7 +99,8 @@ nav{display:flex;justify-content:space-between;align-items:center;gap:.75rem 1.5
 .prog-content p{font-size:12.5px;color:var(--ink-s);line-height:1.65}
 
 /* LIEU */
-.lieu-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-bottom:3.5rem}
+.lieu-grid{position:relative;display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-bottom:3.5rem}
+.lieu-grid::before{content:'';position:absolute;top:-16px;left:-14px;width:58px;height:58px;background:url('deco/fleure-3.webp') no-repeat center/contain;pointer-events:none;z-index:1}
 .lieu-photo{width:100%;height:320px;border-radius:8px;border:1px solid var(--border);margin-bottom:1.5rem}
 @media(max-width:580px){.lieu-photo{height:220px}}
 @media(max-width:580px){.lieu-grid{grid-template-columns:1fr}}
@@ -110,7 +111,8 @@ nav{display:flex;justify-content:space-between;align-items:center;gap:.75rem 1.5
 .lieu-card a:hover{text-decoration:underline}
 
 /* HEBERGEMENT */
-.hotel-list{display:flex;flex-direction:column;gap:.75rem;margin-bottom:3.5rem}
+.hotel-list{position:relative;display:flex;flex-direction:column;gap:.75rem;margin-bottom:3.5rem}
+.hotel-list::after{content:'';position:absolute;bottom:-16px;right:-12px;width:60px;height:60px;background:url('deco/feuilles-2.webp') no-repeat center/contain;pointer-events:none;z-index:1}
 .hotel-card{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:1.25rem 1.5rem;display:grid;grid-template-columns:104px 1fr auto;align-items:center;gap:1.25rem}
 .hotel-photo{width:104px;height:104px;border-radius:8px;overflow:hidden;border:1px solid var(--border);background:repeating-linear-gradient(45deg,#ece0c0,#ece0c0 7px,#f4efe5 7px,#f4efe5 14px);display:flex;align-items:center;justify-content:center;text-align:center;padding:8px;flex-shrink:0}
 .hotel-photo span{font-size:9px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-s);line-height:1.4}
@@ -122,7 +124,8 @@ nav{display:flex;justify-content:space-between;align-items:center;gap:.75rem 1.5
 .badge{font-size:10.5px;padding:3px 10px;border-radius:20px;background:var(--sage-p);color:var(--sage);white-space:nowrap;border:1px solid var(--sage-ll);flex-shrink:0}
 
 /* DRESS CODE */
-.dress-box{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:1.5rem 1.75rem;margin-bottom:3.5rem;border-left:3px solid var(--orange)}
+.dress-box{position:relative;background:var(--card);border:1px solid var(--border);border-radius:8px;padding:1.5rem 1.75rem;margin-bottom:3.5rem;border-left:3px solid var(--orange)}
+.dress-box::after{content:'';position:absolute;bottom:-14px;right:-12px;width:52px;height:52px;background:url('deco/bourgeon-2.webp') no-repeat center/contain;pointer-events:none;z-index:1}
 .dress-box p{font-size:13.5px;color:var(--ink-m);line-height:1.8}
 
 
@@ -264,7 +267,6 @@ footer p{font-size:12px;color:var(--ink-s);line-height:1.9}
   <p class="sec-eyebrow">Où nous retrouver</p>
   <h2 class="sec-title reveal">Le lieu</h2>
   <div class="sec-rule"></div>
-  <div class="voyage-divider" aria-hidden="true"><img src="deco/feuilles-1.webp" alt=""></div>
   <div class="lieu-photo parallax-frame reveal">
     <img class="parallax-img" src="chateau-roquefoulet.jpeg" alt="Château de Roquefoulet illuminé le soir">
   </div>
@@ -284,7 +286,6 @@ footer p{font-size:12px;color:var(--ink-s);line-height:1.9}
   <p class="sec-eyebrow">Dormir sur place</p>
   <h2 class="sec-title reveal">Hébergement</h2>
   <div class="sec-rule"></div>
-  <div class="voyage-divider" aria-hidden="true"><img src="deco/feuilles-1.webp" alt=""></div>
   <div class="hotel-list">
     <div class="hotel-card reveal">
       <div class="hotel-photo"><img src="58514267.jpg" alt="Gîtes & Chambres d'hôtes des Camparros"></div>
@@ -316,7 +317,6 @@ footer p{font-size:12px;color:var(--ink-s);line-height:1.9}
   <p class="sec-eyebrow">Tenue</p>
   <h2 class="sec-title reveal">Dress code</h2>
   <div class="sec-rule"></div>
-  <div class="voyage-divider" aria-hidden="true"><img src="deco/feuilles-1.webp" alt=""></div>
   <div class="dress-box reveal">
     <p><strong style="color:var(--sage)">Pas de dress code,</strong> venez comme vous êtes !</p>
   </div>
