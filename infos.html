@@ -65,7 +65,7 @@ nav{display:flex;justify-content:space-between;align-items:center;gap:.75rem 1.5
 @media(min-width:640px){
   .voyage-timeline{padding-left:30px}
   .voyage-river-line{position:absolute;left:5px;top:4px;bottom:4px;border-left:1px dashed var(--gold-l);opacity:.65}
-  .voyage-boat{position:absolute;left:-8px;top:0;width:30px;height:26px;filter:drop-shadow(0 2px 3px rgba(58,42,24,.25))}
+  .voyage-boat{position:absolute;left:-14px;top:0;width:42px;height:auto;filter:drop-shadow(0 3px 4px rgba(58,42,24,.3))}
 }
 @media(max-width:639px){.voyage-river-line,.voyage-boat{display:none}}
 
@@ -202,12 +202,7 @@ footer p{font-size:12px;color:var(--ink-s);line-height:1.9}
 
   <div class="voyage-timeline">
   <div class="voyage-river-line" aria-hidden="true"></div>
-  <svg class="voyage-boat" aria-hidden="true" viewBox="0 0 48 40">
-    <path d="M6 30 L42 30 L37 38 L11 38 Z" fill="none" stroke="var(--orange)" stroke-width="1.6"/>
-    <path d="M24 30 L24 6" stroke="var(--ink-m)" stroke-width="1.4"/>
-    <path d="M24 8 L38 26 L24 26 Z" fill="var(--orange-ll)" stroke="var(--orange)" stroke-width="1.2"/>
-    <path d="M24 10 L13 26 L24 26 Z" fill="var(--sage-p)" stroke="var(--orange)" stroke-width="1.2"/>
-  </svg>
+  <img class="voyage-boat" src="deco/bateau.webp" alt="" aria-hidden="true">
 
   <div class="prog-day"><span class="prog-day-name">À la mairie</span><span class="prog-day-date">Mardi 19 octobre 2027</span><span class="prog-day-line"></span></div>
   <div class="programme">
