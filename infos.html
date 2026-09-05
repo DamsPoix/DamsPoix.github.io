@@ -59,9 +59,10 @@ nav{display:flex;justify-content:space-between;align-items:center;gap:.75rem 1.5
 .page-header .voyage-paper{padding:4rem 3rem 3rem}
 @media(max-width:600px){.page-header .voyage-paper{padding:2.5rem 1.5rem 2rem}}
 .rsvp-wrap .voyage-paper{padding:2.5rem;border-top:2px solid var(--orange)}
+.voyage-seal{position:absolute;top:-32px;left:50%;transform:translateX(-50%) rotate(-4deg);width:74px;height:auto;z-index:3;pointer-events:none;filter:drop-shadow(0 4px 6px rgba(58,42,24,.35))}
 .star-mark{width:22px;height:28px;margin:0 auto .6rem;background:no-repeat center/contain url('deco/etoile.webp')}
 .voyage-compass{display:flex;justify-content:center;margin:0 0 2rem}
-.voyage-compass svg{width:60px;height:60px}
+.voyage-compass img{width:84px;height:auto;filter:drop-shadow(0 3px 5px rgba(58,42,24,.25))}
 .voyage-divider{display:flex;justify-content:center;margin:0 0 1.5rem}
 .voyage-divider img{width:60px;height:auto;opacity:.9}
 .voyage-timeline{position:relative}
@@ -190,19 +191,7 @@ footer p{font-size:12px;color:var(--ink-s);line-height:1.9}
   <div class="sec-rule"></div>
 
   <div class="voyage-compass" aria-hidden="true">
-    <svg viewBox="0 0 100 100">
-      <g fill="none" stroke="var(--gold)" stroke-width="1">
-        <circle cx="50" cy="50" r="34"/>
-        <circle cx="50" cy="50" r="27"/>
-        <path d="M50 6v14M50 80v14M6 50h14M80 50h14"/>
-      </g>
-      <path fill="var(--gold)" stroke="none" d="M50 18 55 50 50 82 45 50Z"/>
-      <path fill="var(--gold)" stroke="none" opacity=".55" d="M18 50 50 45 82 50 50 55Z"/>
-      <text x="50" y="12" text-anchor="middle" font-size="9" fill="var(--ink-m)" font-family="'IM Fell French Canon SC',serif">N</text>
-      <text x="50" y="96" text-anchor="middle" font-size="9" fill="var(--ink-m)" font-family="'IM Fell French Canon SC',serif">S</text>
-      <text x="10" y="53" text-anchor="middle" font-size="9" fill="var(--ink-m)" font-family="'IM Fell French Canon SC',serif">O</text>
-      <text x="90" y="53" text-anchor="middle" font-size="9" fill="var(--ink-m)" font-family="'IM Fell French Canon SC',serif">E</text>
-    </svg>
+    <img src="deco/boussole.webp" alt="">
   </div>
 
   <div class="voyage-timeline">
@@ -335,6 +324,7 @@ footer p{font-size:12px;color:var(--ink-s);line-height:1.9}
   <p style="font-size:13px;color:var(--ink-s);margin-bottom:1.5rem">Merci de répondre avant le <strong style="color:var(--ink-m)">31 décembre 2026</strong>. Pour toute question : <a href="/cdn-cgi/l/email-protection#d8b5b9aab1b9bfbd98a8b9adb4b1b6bdf5bdacf5bcb9b5b1bdb6f6beaa" style="color:var(--sage)"><span class="__cf_email__" data-cfemail="84e9e5f6ede5e3e1c4f4e5f1e8edeae1a9e1f0a9e0e5e9ede1eaaae2f6">[email&#160;protected]</span></a></p>
   <div class="voyage-divider" aria-hidden="true"><img src="deco/feuilles-1.webp" alt=""></div>
   <div class="rsvp-wrap reveal" id="rsvpWrap">
+   <img class="voyage-seal" src="deco/cire-orange.webp" alt="">
    <div class="voyage-paper">
     <div class="form-grid" style="margin-bottom:0">
       <div class="fg"><label>Prénom *</label><input type="text" id="prenom" placeholder="Marie"><span class="field-error" id="prenomError"></span></div>
@@ -393,7 +383,7 @@ footer p{font-size:12px;color:var(--ink-s);line-height:1.9}
 </div>
 
 <footer>
-  <div class="footer-crest"><img src="Pauline et Damien logo mariage.png" alt="Pauline &amp; Damien"></div>
+  <div class="footer-crest"><img src="deco/cire-orange.webp" alt="Pauline &amp; Damien"></div>
   <p>20 octobre 2027 · Château de Roquefoulet · Montgeard</p>
   <p>Questions : <span style="color:var(--sage)"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="0e636f7c676f696b4e7e6f7b6267606b236b7a236a6f63676b6020687c">[email&#160;protected]</a></span></p>
 </footer>
