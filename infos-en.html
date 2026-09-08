@@ -72,7 +72,7 @@ nav{display:flex;justify-content:space-between;align-items:center;gap:.75rem 1.5
   .route-track{fill:none;stroke:var(--border);stroke-width:1.6}
   .route-live{fill:none;stroke:url(#routegrad);stroke-width:2.4;stroke-linecap:round;filter:drop-shadow(0 1px 5px rgba(179,137,47,.6))}
   .route-pulse{fill:var(--orange);opacity:.9}
-  .voyage-boat{position:absolute;top:0;width:48px;height:auto;z-index:5;filter:drop-shadow(0 3px 4px rgba(58,42,24,.35))}
+  .voyage-boat{position:absolute;top:0;width:48px;height:auto;z-index:8;filter:drop-shadow(0 3px 4px rgba(58,42,24,.35))}
 }
 @media(max-width:639px){.voyage-river-line,.voyage-boat{display:none}}
 
@@ -533,35 +533,75 @@ function toggleEnfantsNb(){
   var BOAT_W = 48;
   var riverSvg = track.querySelector('.voyage-river-line');
 
+  var CLEAR = 10;
+
+  function edgeX(block, trackRect){
+    var blockRect = block.getBoundingClientRect();
+    var isRight = block.classList.contains('prog-block--right');
+    return isRight
+      ? (blockRect.right - trackRect.left + CLEAR)
+      : (blockRect.left - trackRect.left - BOAT_W - CLEAR);
+  }
+
   function buildAnchors(){
     var trackRect = track.getBoundingClientRect();
-    var blocks = track.querySelectorAll('.prog-block');
-    var anchors = [];
-    blocks.forEach(function(block){
+    var blocks = Array.prototype.slice.call(track.querySelectorAll('.prog-block'));
+    var labelPoints = blocks.map(function(block){
       var day = block.querySelector('.prog-day');
-      var blockRect = block.getBoundingClientRect();
-      var isRight = block.classList.contains('prog-block--right');
-      var x = isRight
-        ? (blockRect.right - trackRect.left - BOAT_W)
-        : (blockRect.left - trackRect.left);
       var r = (day || block).getBoundingClientRect();
-      var y = (r.top - trackRect.top) + r.height / 2;
-      anchors.push({ x: x, y: y });
+      return {
+        x: edgeX(block, trackRect),
+        y: (r.top - trackRect.top) + r.height / 2
+      };
+    });
+    var anchors = [];
+    labelPoints.forEach(function(p, i){
+      anchors.push(p);
+      if(i < labelPoints.length - 1){
+        var next = labelPoints[i + 1];
+        var available = next.y - p.y;
+        var gap = Math.min(100, Math.max(55, available * 0.3));
+        anchors.push({ x: p.x, y: p.y + 34 });
+        anchors.push({ x: next.x, y: p.y + gap });
+      }
     });
     return anchors;
   }
 
   function segmentsFromAnchors(anchors){
+    // Centripetal Catmull-Rom: unlike the uniform variant, this stays well-behaved
+    // when neighbouring anchors are unevenly spaced (which our route waypoints are),
+    // avoiding the tangent-overshoot spikes the uniform formula produces.
+    function dist(a, b){ return Math.pow(Math.hypot(b.x - a.x, b.y - a.y), 0.5) || 0.0001; }
     var segs = [];
     for(var i = 0; i < anchors.length - 1; i++){
-      var p0 = anchors[i - 1] || anchors[i];
+      var hasPrev = i > 0;
+      var hasNext = i < anchors.length - 2;
+      var p0 = hasPrev ? anchors[i - 1] : anchors[i];
       var p1 = anchors[i];
       var p2 = anchors[i + 1];
-      var p3 = anchors[i + 2] || p2;
+      var p3 = hasNext ? anchors[i + 2] : anchors[i + 1];
+
+      var m1x, m1y, m2x, m2y;
+      if(hasPrev){
+        var t0 = 0, t1 = dist(p0, p1), t2 = t1 + dist(p1, p2);
+        m1x = (t2 - t1) * ((p1.x - p0.x) / t1 - (p2.x - p0.x) / t2 + (p2.x - p1.x) / (t2 - t1));
+        m1y = (t2 - t1) * ((p1.y - p0.y) / t1 - (p2.y - p0.y) / t2 + (p2.y - p1.y) / (t2 - t1));
+      } else {
+        m1x = p2.x - p1.x; m1y = p2.y - p1.y;
+      }
+      if(hasNext){
+        var u1 = dist(p1, p2), u2 = u1 + dist(p2, p3), u0 = 0;
+        m2x = (u1 - u0) * ((p2.x - p1.x) / u1 - (p3.x - p1.x) / u2 + (p3.x - p2.x) / (u2 - u1));
+        m2y = (u1 - u0) * ((p2.y - p1.y) / u1 - (p3.y - p1.y) / u2 + (p3.y - p2.y) / (u2 - u1));
+      } else {
+        m2x = p2.x - p1.x; m2y = p2.y - p1.y;
+      }
+
       segs.push({
         p1: p1, p2: p2,
-        c1: { x: p1.x + (p2.x - p0.x) / 6, y: p1.y + (p2.y - p0.y) / 6 },
-        c2: { x: p2.x - (p3.x - p1.x) / 6, y: p2.y - (p3.y - p1.y) / 6 }
+        c1: { x: p1.x + m1x / 3, y: p1.y + m1y / 3 },
+        c2: { x: p2.x - m2x / 3, y: p2.y - m2y / 3 }
       });
     }
     return segs;
