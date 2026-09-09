@@ -65,18 +65,6 @@ nav{display:flex;justify-content:space-between;align-items:center;gap:.75rem 1.5
 .voyage-compass img{width:110px;height:auto;opacity:.9}
 .voyage-divider{display:flex;justify-content:center;margin:0 0 1.5rem}
 .voyage-divider img{width:60px;height:auto;opacity:.9}
-.voyage-timeline{position:relative}
-@media(min-width:640px){.voyage-timeline{width:calc(100% + 220px);margin-left:-110px;margin-right:-110px;padding:0 40px}}
-@media(min-width:640px) and (max-width:1000px){.voyage-timeline{width:100%;margin-left:0;margin-right:0;padding:0}}
-@media(min-width:640px){
-  .voyage-river-line{position:absolute;left:0;top:0;bottom:0;width:100%;overflow:visible;pointer-events:none;display:block;z-index:4}
-  .route-track{fill:none;stroke:var(--border);stroke-width:1.6}
-  .route-live{fill:none;stroke:url(#routegrad);stroke-width:2.4;stroke-linecap:round;filter:drop-shadow(0 1px 5px rgba(179,137,47,.6))}
-  .route-pulse{fill:var(--orange);opacity:.9}
-  .voyage-boat{position:absolute;top:0;width:48px;height:auto;z-index:8;filter:drop-shadow(0 3px 4px rgba(58,42,24,.35))}
-}
-@media(max-width:639px){.voyage-river-line,.voyage-boat{display:none}}
-
 /* footer rose-wreath crest */
 .footer-crest{position:relative;width:184px;height:172px;margin:0 auto .25rem;display:flex;align-items:center;justify-content:center}
 .footer-crest img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain}
@@ -91,11 +79,7 @@ nav{display:flex;justify-content:space-between;align-items:center;gap:.75rem 1.5
 
 /* PROGRAMME */
 .programme{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);border:1px solid var(--border);border-radius:8px;overflow:hidden;margin-bottom:2.5rem}
-.prog-day{position:relative;z-index:6;display:flex;align-items:baseline;gap:.85rem;margin:0 0 1rem;background:var(--bg)}
-.prog-day--right{flex-direction:row-reverse;text-align:right}
-.prog-block{max-width:min(58%,620px)}
-.prog-block--right{margin-left:auto}
-@media(max-width:640px){.prog-block{max-width:100%}.prog-block--right{margin-left:0}}
+.prog-day{display:flex;align-items:baseline;gap:.85rem;margin:0 0 1rem}
 .prog-day:not(:first-of-type){margin-top:2.5rem}
 .prog-day-name{font-family:'Cormorant Garamond',serif;font-size:1.35rem;font-style:italic;color:var(--sage);white-space:nowrap}
 .prog-day-date{font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--orange);white-space:nowrap}
@@ -206,22 +190,6 @@ footer p{font-size:12px;color:var(--ink-s);line-height:1.9}
     <img src="deco/rose-des-vents-2.webp" alt="">
   </div>
 
-  <div class="voyage-timeline">
-  <svg class="voyage-river-line" aria-hidden="true">
-    <defs>
-      <linearGradient id="routegrad" x1="0" y1="0" x2="0" y2="1">
-        <stop offset="0" stop-color="var(--sage)"/>
-        <stop offset=".5" stop-color="var(--gold)"/>
-        <stop offset="1" stop-color="var(--orange)"/>
-      </linearGradient>
-    </defs>
-    <path class="route-track"/>
-    <path class="route-live"/>
-    <circle class="route-pulse" r="4"/>
-  </svg>
-  <img class="voyage-boat" src="deco/bateau.webp" alt="" aria-hidden="true">
-
-  <div class="prog-block">
   <div class="prog-day"><span class="prog-day-name">À la mairie</span><span class="prog-day-date">Mardi 19 octobre 2027</span><span class="prog-day-line"></span></div>
   <div class="programme">
     <div class="prog-item reveal">
@@ -241,10 +209,8 @@ footer p{font-size:12px;color:var(--ink-s);line-height:1.9}
       <div class="prog-content"><h3>Dîner</h3><p>Repas au restaurant avec les proches</p></div>
     </div>
   </div>
-  </div>
 
-  <div class="prog-block prog-block--right">
-  <div class="prog-day prog-day--right"><span class="prog-day-name">Au château</span><span class="prog-day-date">Mercredi 20 octobre 2027</span><span class="prog-day-line"></span></div>
+  <div class="prog-day"><span class="prog-day-name">Au château</span><span class="prog-day-date">Mercredi 20 octobre 2027</span><span class="prog-day-line"></span></div>
   <div class="programme">
     <div class="prog-item reveal">
       <div class="prog-time">14h30</div>
@@ -271,9 +237,7 @@ footer p{font-size:12px;color:var(--ink-s);line-height:1.9}
       <div class="prog-content"><h3>Dîner & soirée</h3><p>Repas assis, musique live et soirée dansante</p></div>
     </div>
   </div>
-  </div>
 
-  <div class="prog-block">
   <div class="prog-day"><span class="prog-day-name">Le lendemain</span><span class="prog-day-date">Jeudi 21 octobre 2027</span><span class="prog-day-line"></span></div>
   <div class="programme">
     <div class="prog-item reveal">
@@ -284,8 +248,6 @@ footer p{font-size:12px;color:var(--ink-s);line-height:1.9}
       <div class="prog-time">15h00</div>
       <div class="prog-content"><h3>Au revoir</h3><p>Derniers câlins et départ des invités</p></div>
     </div>
-  </div>
-  </div>
   </div>
 
   <!-- LIEU -->
@@ -525,162 +487,5 @@ function toggleEnfantsNb(){
 }
 </script>
 <script src="modern.js?v=2"></script>
-<script>
-(function(){
-  var track = document.querySelector('.voyage-timeline');
-  var boat = document.querySelector('.voyage-boat');
-  if(!track || !boat || !window.gsap || !window.ScrollTrigger) return;
-  gsap.registerPlugin(ScrollTrigger);
-  var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if(reducedMotion) return;
-
-  var BOAT_W = 48;
-  var riverSvg = track.querySelector('.voyage-river-line');
-
-  var CLEAR = 10;
-
-  function edgeX(block, trackRect){
-    var blockRect = block.getBoundingClientRect();
-    var isRight = block.classList.contains('prog-block--right');
-    return isRight
-      ? (blockRect.right - trackRect.left + CLEAR)
-      : (blockRect.left - trackRect.left - BOAT_W - CLEAR);
-  }
-
-  function buildAnchors(){
-    var trackRect = track.getBoundingClientRect();
-    var blocks = Array.prototype.slice.call(track.querySelectorAll('.prog-block'));
-    var labelPoints = blocks.map(function(block){
-      var day = block.querySelector('.prog-day');
-      var r = (day || block).getBoundingClientRect();
-      return {
-        x: edgeX(block, trackRect),
-        y: (r.top - trackRect.top) + r.height / 2
-      };
-    });
-    var anchors = [];
-    labelPoints.forEach(function(p, i){
-      anchors.push(p);
-      if(i < labelPoints.length - 1){
-        var next = labelPoints[i + 1];
-        var available = next.y - p.y;
-        var gap = Math.min(100, Math.max(55, available * 0.3));
-        anchors.push({ x: p.x, y: p.y + 34 });
-        anchors.push({ x: next.x, y: p.y + gap });
-      }
-    });
-    return anchors;
-  }
-
-  function segmentsFromAnchors(anchors){
-    // Centripetal Catmull-Rom: unlike the uniform variant, this stays well-behaved
-    // when neighbouring anchors are unevenly spaced (which our route waypoints are),
-    // avoiding the tangent-overshoot spikes the uniform formula produces.
-    function dist(a, b){ return Math.pow(Math.hypot(b.x - a.x, b.y - a.y), 0.5) || 0.0001; }
-    var segs = [];
-    for(var i = 0; i < anchors.length - 1; i++){
-      var hasPrev = i > 0;
-      var hasNext = i < anchors.length - 2;
-      var p0 = hasPrev ? anchors[i - 1] : anchors[i];
-      var p1 = anchors[i];
-      var p2 = anchors[i + 1];
-      var p3 = hasNext ? anchors[i + 2] : anchors[i + 1];
-
-      var m1x, m1y, m2x, m2y;
-      if(hasPrev){
-        var t0 = 0, t1 = dist(p0, p1), t2 = t1 + dist(p1, p2);
-        m1x = (t2 - t1) * ((p1.x - p0.x) / t1 - (p2.x - p0.x) / t2 + (p2.x - p1.x) / (t2 - t1));
-        m1y = (t2 - t1) * ((p1.y - p0.y) / t1 - (p2.y - p0.y) / t2 + (p2.y - p1.y) / (t2 - t1));
-      } else {
-        m1x = p2.x - p1.x; m1y = p2.y - p1.y;
-      }
-      if(hasNext){
-        var u1 = dist(p1, p2), u2 = u1 + dist(p2, p3), u0 = 0;
-        m2x = (u1 - u0) * ((p2.x - p1.x) / u1 - (p3.x - p1.x) / u2 + (p3.x - p2.x) / (u2 - u1));
-        m2y = (u1 - u0) * ((p2.y - p1.y) / u1 - (p3.y - p1.y) / u2 + (p3.y - p2.y) / (u2 - u1));
-      } else {
-        m2x = p2.x - p1.x; m2y = p2.y - p1.y;
-      }
-
-      segs.push({
-        p1: p1, p2: p2,
-        c1: { x: p1.x + m1x / 3, y: p1.y + m1y / 3 },
-        c2: { x: p2.x - m2x / 3, y: p2.y - m2y / 3 }
-      });
-    }
-    return segs;
-  }
-
-  var trackPath = riverSvg ? riverSvg.querySelector('.route-track') : null;
-  var livePath = riverSvg ? riverSvg.querySelector('.route-live') : null;
-  var pulse = riverSvg ? riverSvg.querySelector('.route-pulse') : null;
-  var pathLen = 0;
-
-  var anchors = buildAnchors();
-  var segments = segmentsFromAnchors(anchors);
-
-  function pathD(){
-    var d = 'M ' + anchors[0].x.toFixed(1) + ' ' + anchors[0].y.toFixed(1);
-    segments.forEach(function(seg){
-      d += ' C ' + seg.c1.x.toFixed(1) + ' ' + seg.c1.y.toFixed(1) + ', ' +
-                    seg.c2.x.toFixed(1) + ' ' + seg.c2.y.toFixed(1) + ', ' +
-                    seg.p2.x.toFixed(1) + ' ' + seg.p2.y.toFixed(1);
-    });
-    return d;
-  }
-
-  function drawRiver(){
-    if(!livePath) return;
-    var trackRect = track.getBoundingClientRect();
-    if(trackRect.width < 50) return;
-    riverSvg.setAttribute('width', trackRect.width);
-    riverSvg.setAttribute('height', trackRect.height);
-    riverSvg.setAttribute('viewBox', '0 0 ' + trackRect.width.toFixed(1) + ' ' + trackRect.height.toFixed(1));
-    var d = pathD();
-    if(trackPath) trackPath.setAttribute('d', d);
-    livePath.setAttribute('d', d);
-    pathLen = livePath.getTotalLength();
-    livePath.style.strokeDasharray = pathLen;
-    livePath.style.strokeDashoffset = pathLen;
-  }
-  drawRiver();
-
-  function rebuild(){
-    anchors = buildAnchors();
-    segments = segmentsFromAnchors(anchors);
-    drawRiver();
-  }
-  window.addEventListener('resize', function(){ rebuildAndRefresh(); });
-
-  function rebuildAndRefresh(){
-    rebuild();
-    if(window.ScrollTrigger) ScrollTrigger.refresh();
-    if(scrollTriggerInstance) updateBoat(scrollTriggerInstance);
-  }
-  if(document.fonts && document.fonts.ready){ document.fonts.ready.then(rebuildAndRefresh); }
-  window.addEventListener('load', rebuildAndRefresh);
-  [150,400,800,1500].forEach(function(d){ setTimeout(rebuildAndRefresh, d); });
-
-  function updateBoat(self){
-    var len = livePath.getTotalLength();
-    if(!len) return;
-    var boatH = boat.getBoundingClientRect().height;
-    var pt = livePath.getPointAtLength(len * self.progress);
-    livePath.style.strokeDashoffset = len * (1 - self.progress);
-    boat.style.top = (pt.y - boatH / 2) + 'px';
-    boat.style.left = pt.x + 'px';
-    if(pulse){ pulse.setAttribute('cx', pt.x); pulse.setAttribute('cy', pt.y); }
-  }
-
-  var scrollTriggerInstance = ScrollTrigger.create({
-    trigger: track,
-    start: 'top top',
-    end: 'bottom bottom',
-    scrub: true,
-    onUpdate: updateBoat
-  });
-  updateBoat(scrollTriggerInstance);
-})();
-</script>
 </body>
 </html>
