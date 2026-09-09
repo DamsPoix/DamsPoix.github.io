@@ -47,9 +47,15 @@ nav{display:flex;justify-content:space-between;align-items:center;gap:.75rem 1.5
 
 /* STORY HERO (rotating gallery) */
 .story-hero{position:relative;display:flex;align-items:center;justify-content:center;min-height:1260px;overflow:hidden;padding:3rem 1.5rem}
+.story-hero::after{content:'';position:absolute;width:clamp(70px,14vw,130px);height:clamp(70px,14vw,130px);background:no-repeat center/contain;pointer-events:none;z-index:2;bottom:18px;right:18px;background-image:url('deco/bouquet-2.webp');transform:scaleX(-1)}
+@media(max-width:600px){.story-hero::after{width:64px;height:64px}}
 .story-hero-center{position:relative;z-index:5;text-align:center;max-width:460px;background:radial-gradient(ellipse at center,var(--bg) 55%,rgba(247,243,237,0) 100%);padding:2rem 1.5rem}
 .hero-eyebrow{font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:var(--orange);margin-bottom:1.5rem}
-.hero-title{font-family:'Great Vibes',cursive;font-size:clamp(3.4rem,8vw,6rem);color:var(--sage);line-height:1.1;margin-bottom:1rem}
+.hero-title{position:relative;font-family:'Great Vibes',cursive;font-size:clamp(3.4rem,8vw,6rem);color:var(--sage);line-height:1.1;margin-bottom:1rem}
+.hero-title::before,.hero-title::after{content:'';position:absolute;top:-26px;width:84px;height:195px;background:no-repeat top center/contain;pointer-events:none}
+.hero-title::before{left:-64px;background-image:url('deco/bouquet-1.webp')}
+.hero-title::after{right:-64px;background-image:url('deco/bouquet-2.webp');transform:scaleX(-1)}
+@media(max-width:640px){.hero-title::before,.hero-title::after{display:none}}
 .hero-date-loc{font-family:'Cormorant Garamond',serif;font-size:clamp(1.05rem,2.5vw,1.15rem);color:var(--ink-m);font-style:italic;margin-bottom:2rem;line-height:1.6}
 .hero-rule{display:flex;align-items:center;justify-content:center;gap:1rem;margin-bottom:2rem}
 .hero-rule span{width:40px;height:1px;background:var(--orange-l)}
@@ -88,7 +94,12 @@ nav{display:flex;justify-content:space-between;align-items:center;gap:.75rem 1.5
 .timeline-item{display:grid;grid-template-columns:90px 1fr;gap:1.5rem;align-items:start;min-width:0}
 @media(max-width:500px){.timeline-item{grid-template-columns:64px 1fr;gap:1rem}}
 .timeline-year{font-family:'Cormorant Garamond',serif;font-size:1.4rem;color:var(--orange-l);font-style:italic;text-align:right;padding-top:.1rem}
-.timeline-content{border-left:1px solid var(--border);padding-left:1.5rem;min-width:0}
+.timeline-content{position:relative;border-left:1px solid var(--border);padding-left:1.5rem;min-width:0}
+.timeline-content::before{content:'';position:absolute;left:-12px;top:-2px;width:24px;height:24px;background:no-repeat center/contain;pointer-events:none}
+.timeline-item:nth-child(1) .timeline-content::before{background-image:url('deco/bourgeon-1.webp')}
+.timeline-item:nth-child(2) .timeline-content::before{background-image:url('deco/bourgeon-2.webp')}
+.timeline-item:nth-child(3) .timeline-content::before{background-image:url('deco/bourgeon-3.webp')}
+.timeline-item:nth-child(4) .timeline-content::before{background-image:url('deco/feuille-solo.webp')}
 .timeline-content h3{font-family:'Cormorant Garamond',serif;font-size:1.35rem;color:var(--sage);margin-bottom:.35rem}
 .timeline-content p{font-size:13.5px;color:var(--ink-m);line-height:1.8}
 .demande-gallery{display:grid;grid-template-columns:1.2fr 1fr;grid-auto-rows:96px;gap:.5rem;margin-top:1.1rem;max-width:300px}
@@ -122,6 +133,8 @@ nav{display:flex;justify-content:space-between;align-items:center;gap:.75rem 1.5
 @media(max-width:500px){.aventures-gallery{grid-auto-rows:96px}}
 
 /* FOOTER */
+.footer-divider{display:flex;justify-content:center;margin:0 0 2.5rem}
+.footer-divider img{width:60px;height:auto;opacity:.9}
 footer{text-align:center;padding:2.5rem 2rem 3rem;border-top:1px solid var(--border)}
 footer p{font-size:12px;color:var(--ink-s);line-height:1.9}
 .footer-crest{position:relative;width:184px;height:172px;margin:0 auto .25rem;display:flex;align-items:center;justify-content:center}
@@ -193,7 +206,6 @@ body.intro-active{overflow:hidden;height:100vh}
 <div class="nav-backdrop" id="navBackdrop"></div>
 
 <section class="story-hero">
-  <div class="compass-mark" aria-hidden="true"></div>
   <div class="orbit-wrap">
     <div class="orbit" id="orbit">
       <div class="orbit-photo" data-caption="2024 · Finland — frozen forests and our first memories together."><img src="IMG-20241123-WA0107.jpg" alt=""></div>
@@ -302,6 +314,8 @@ body.intro-active{overflow:hidden;height:100vh}
     </div>
   </div>
 </section>
+
+<div class="footer-divider" aria-hidden="true"><img src="deco/feuilles-1.webp" alt=""></div>
 
 <footer>
   <div class="footer-crest"><img src="deco/cire-vert.webp" alt="Pauline &amp; Damien"></div>
