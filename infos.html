@@ -136,7 +136,11 @@ nav{display:flex;justify-content:space-between;align-items:center;gap:.75rem 1.5
 .btn-submit{background:var(--orange);color:#fff;border:none;padding:.85rem 2rem;border-radius:6px;font-size:11px;letter-spacing:.18em;text-transform:uppercase;cursor:pointer;width:100%;font-family:'Jost',sans-serif;margin-top:.5rem;transition:background .2s}
 .btn-submit:hover{background:var(--orange-l)}
 .field-error{display:block;font-size:11px;color:#b3261e;margin-top:.3rem;min-height:14px}
-.fg input.invalid{border-color:#b3261e}
+.fg input.invalid,.fg select.invalid{border-color:#b3261e}
+.guests-intro{font-size:12.5px;color:var(--ink-s);line-height:1.6;margin:.25rem 0 1rem}
+.guest{border:1px solid var(--border);border-radius:8px;padding:1rem 1.1rem .15rem;margin-bottom:1rem;background:rgba(255,255,255,.45)}
+.guest-title{font-family:'Cormorant Garamond',serif;font-size:1.1rem;color:var(--sage);margin-bottom:.7rem}
+.guest-title span{font-size:.85rem;font-style:italic;color:var(--ink-s)}
 .form-error{font-size:12.5px;color:#b3261e;text-align:center;margin:0 0 .75rem}
 .rsvp-success{display:none;text-align:center;padding:2.5rem 1rem}
 .rsvp-success h3{font-family:'Great Vibes',cursive;font-size:2.5rem;color:var(--sage);margin-bottom:.5rem}
@@ -333,42 +337,27 @@ footer p{font-size:12px;color:var(--ink-s);line-height:1.9}
     <div class="form-grid" style="margin-bottom:0">
       <div class="fg">
         <label>Présence</label>
-        <select id="presence">
+        <select id="presence" onchange="toggleGuests()">
           <option value="oui">Oui, avec joie !</option>
           <option value="non">Je ne pourrai pas venir</option>
         </select>
       </div>
       <div class="fg">
         <label>Nombre de personnes</label>
-        <select id="nb"><option>1</option><option>2</option><option>3</option><option>4</option></select>
+        <select id="nb" onchange="renderGuests()"><option>1</option><option>2</option><option>3</option><option>4</option></select>
       </div>
     </div>
-    <div class="form-grid" style="margin-bottom:0">
+    <div id="guestsWrap">
+      <p class="guests-intro">Pour chaque personne : adulte ou enfant, régime alimentaire, et présence à la mairie (19 octobre 2027) et au brunch (21 octobre 2027).</p>
+      <div id="guests"></div>
       <div class="fg">
-        <label>Enfants présents ?</label>
-        <select id="enfants" onchange="toggleEnfantsNb()">
-          <option value="non">Non</option>
-          <option value="oui">Oui</option>
-        </select>
+        <label>Une musique que vous aimeriez entendre ? (optionnel)</label>
+        <input type="text" id="musique" placeholder="Titre et artiste">
       </div>
-      <div class="fg" id="enfantsNbWrap" style="display:none">
-        <label>Combien d'enfants ?</label>
-        <select id="enfantsNb"><option>1</option><option>2</option><option>3</option><option>4</option></select>
-      </div>
-    </div>
-    <div class="fg">
-      <label>Régime alimentaire</label>
-      <select id="regime">
-        <option>Aucune restriction</option>
-        <option>Végétarien</option>
-        <option>Vegan</option>
-        <option>Sans gluten</option>
-        <option>Allergie (préciser dans le message)</option>
-      </select>
     </div>
     <div class="fg">
       <label>Un mot pour les mariés (optionnel)</label>
-      <textarea id="message" placeholder="Une chanson à demander, un souvenir partagé, une chanson favorite..."></textarea>
+      <textarea id="message" placeholder="Un souvenir partagé, un petit mot doux..."></textarea>
     </div>
     <p class="form-error" id="formError" style="display:none"></p>
     <button class="btn-submit" onclick="submitRSVP()">Confirmer ma présence</button>
@@ -399,6 +388,35 @@ const SHEET_ENDPOINT = "https://script.google.com/macros/s/AKfycbzCW0rthYLLd22Uf
 function isValidEmail(email){
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 }
+function guestHTML(i){
+  const attend = id => `<select id="g${i}_${id}"><option value="">Choisir…</option><option value="oui">Présent(e)</option><option value="non">Absent(e)</option></select>`;
+  return `<div class="guest">
+    <p class="guest-title">Personne ${i}${i === 1 ? ' <span>(vous)</span>' : ''}</p>
+    ${i === 1 ? '' : `<div class="fg"><label>Prénom</label><input type="text" id="g${i}_name" placeholder="Prénom de la personne"></div>`}
+    <div class="form-grid" style="margin-bottom:0">
+      <div class="fg"><label>Adulte ou enfant</label><select id="g${i}_type"><option value="adulte">Adulte</option><option value="enfant">Enfant</option></select></div>
+      <div class="fg"><label>Végétarien(ne) ?</label><select id="g${i}_veg"><option value="non">Non</option><option value="oui">Oui</option></select></div>
+    </div>
+    <div class="fg"><label>Allergies / restrictions alimentaires</label><input type="text" id="g${i}_diet" placeholder="Aucune, ou : sans gluten, lactose, arachides…"></div>
+    <div class="form-grid" style="margin-bottom:0">
+      <div class="fg"><label>Mairie · 19 octobre 2027</label>${attend('mairie')}</div>
+      <div class="fg"><label>Brunch · 21 octobre 2027</label>${attend('brunch')}</div>
+    </div>
+  </div>`;
+}
+function renderGuests(){
+  const wrap = document.getElementById('guests');
+  const n = parseInt(document.getElementById('nb').value, 10) || 1;
+  while(wrap.children.length > n) wrap.removeChild(wrap.lastElementChild);
+  while(wrap.children.length < n) wrap.insertAdjacentHTML('beforeend', guestHTML(wrap.children.length + 1));
+}
+function toggleGuests(){
+  const attending = document.getElementById('presence').value === 'oui';
+  document.getElementById('guestsWrap').style.display = attending ? 'block' : 'none';
+}
+renderGuests();
+document.getElementById('guests').addEventListener('change', e => e.target.classList.remove('invalid'));
+
 function clearRsvpErrors(){
   ['prenom','email'].forEach(id=>{
     const input = document.getElementById(id);
@@ -406,6 +424,7 @@ function clearRsvpErrors(){
     if(input) input.classList.remove('invalid');
     if(err) err.textContent = '';
   });
+  document.querySelectorAll('#guests select.invalid').forEach(s => s.classList.remove('invalid'));
   const formErr = document.getElementById('formError');
   if(formErr){ formErr.style.display = 'none'; formErr.textContent = ''; }
 }
@@ -443,14 +462,43 @@ async function submitRSVP(){
     document.getElementById(!prenom ? 'prenom' : 'email').focus();
     return;
   }
-  const enfants = get('enfants');
+  const attending = get('presence') === 'oui';
+  const guests = [];
+  if(attending){
+    const n = parseInt(get('nb'), 10) || 1;
+    for(let i = 1; i <= n; i++){
+      guests.push({
+        nom: i === 1 ? [prenom, nom].filter(Boolean).join(' ') : (get('g'+i+'_name') || 'Personne '+i),
+        type: get('g'+i+'_type'),
+        vegetarien: get('g'+i+'_veg'),
+        restrictions: get('g'+i+'_diet'),
+        mairie: get('g'+i+'_mairie'),
+        brunch: get('g'+i+'_brunch')
+      });
+    }
+    const missing = [];
+    guests.forEach((g, idx) => {
+      ['mairie','brunch'].forEach(k => { if(!g[k]) missing.push(document.getElementById('g'+(idx+1)+'_'+k)); });
+    });
+    if(missing.length){
+      missing.forEach(s => s.classList.add('invalid'));
+      showFormError('Merci d\'indiquer, pour chaque personne, sa présence à la mairie (19/10) et au brunch (21/10).');
+      missing[0].focus();
+      return;
+    }
+  }
+  const children = guests.filter(g => g.type === 'enfant').length;
   const data = {
     prenom, nom, email,
     presence: get('presence'),
     nb:       get('nb'),
-    enfants:  enfants,
-    enfantsNb: enfants === 'oui' ? get('enfantsNb') : '0',
-    regime:   get('regime'),
+    enfants:  children ? 'oui' : 'non',
+    enfantsNb: String(children),
+    regime:   guests.map(g => `${g.nom} (${g.type}) : ${g.vegetarien === 'oui' ? 'végétarien' : 'non végétarien'}${g.restrictions ? ' ; ' + g.restrictions : ''} ; mairie 19/10 : ${g.mairie} ; brunch 21/10 : ${g.brunch}`).join(' | '),
+    personnes: guests,
+    musique:  attending ? get('musique') : '',
+    mairie:   String(guests.filter(g => g.mairie === 'oui').length),
+    brunch:   String(guests.filter(g => g.brunch === 'oui').length),
     message:  get('message'),
     date:     new Date().toLocaleString('fr-FR')
   };
@@ -486,12 +534,6 @@ async function submitRSVP(){
     btn.textContent = label;
     showFormError("Une erreur est survenue lors de l'envoi. Merci de réessayer, ou de nous écrire à mariage@pauline-et-damien.fr");
   }
-}
-
-function toggleEnfantsNb(){
-  const wrap = document.getElementById('enfantsNbWrap');
-  const oui = document.getElementById('enfants').value === 'oui';
-  wrap.style.display = oui ? 'flex' : 'none';
 }
 </script>
 <script src="modern.js?v=2"></script>

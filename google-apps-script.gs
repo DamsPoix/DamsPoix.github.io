@@ -41,11 +41,15 @@ function doPost(e) {
 
     // En-têtes (créés une seule fois, à la première réponse)
     var headers = ['Horodatage', 'Prénom', 'Nom', 'Email', 'Présence',
-                   'Nombre de personnes', 'Enfants présents', 'Nombre d\'enfants', 'Régime alimentaire', 'Message'];
+                   'Nombre de personnes', 'Enfants présents', 'Nombre d\'enfants',
+                   'Détail par personne (adulte/enfant, régime, mairie, brunch)', 'Message',
+                   'Musique', 'Présents mairie 19/10', 'Présents brunch 21/10'];
     if (sheet.getLastRow() === 0) {
       sheet.appendRow(headers);
-      sheet.getRange(1, 1, 1, headers.length).setFontWeight('bold');
+    } else {
+      sheet.getRange(1, 1, 1, headers.length).setValues([headers]);
     }
+    sheet.getRange(1, 1, 1, headers.length).setFontWeight('bold');
 
     // Lecture des données (envoyées en JSON dans le corps de la requête)
     var data = {};
@@ -65,7 +69,10 @@ function doPost(e) {
       data.enfants  || '',
       data.enfantsNb|| '',
       data.regime   || '',
-      data.message  || ''
+      data.message  || '',
+      data.musique  || '',
+      data.mairie   || '',
+      data.brunch   || ''
     ]);
 
     return ContentService
