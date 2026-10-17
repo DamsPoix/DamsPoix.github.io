@@ -83,6 +83,7 @@ nav{display:flex;justify-content:space-between;align-items:center;gap:.75rem 1.5
 .prog-day-name{font-family:'Cormorant Garamond',serif;font-size:1.35rem;font-style:italic;color:var(--sage);white-space:nowrap}
 .prog-day-date{font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--orange);white-space:nowrap}
 .prog-day-line{flex:1;height:1px;background:var(--border)}
+.programme .prog-item:last-child:nth-child(odd){grid-column:1/-1}
 @media(max-width:580px){.programme{grid-template-columns:1fr}}
 .prog-item{position:relative;z-index:6;background:var(--card);padding:1.5rem 1.75rem;display:flex;gap:1.25rem;align-items:flex-start}
 .prog-time{font-family:'Cormorant Garamond',serif;font-size:1.1rem;color:var(--orange);font-weight:300;white-space:nowrap;padding-top:.1rem;min-width:52px}
@@ -140,6 +141,7 @@ nav{display:flex;justify-content:space-between;align-items:center;gap:.75rem 1.5
 .guest{border:1px solid var(--border);border-radius:8px;padding:1rem 1.1rem .15rem;margin-bottom:1rem;background:rgba(255,255,255,.45)}
 .guest-title{font-family:'Cormorant Garamond',serif;font-size:1.1rem;color:var(--sage);margin-bottom:.7rem}
 .guest-title span{font-size:.85rem;font-style:italic;color:var(--ink-s)}
+#guests.declined .guest:not(:first-child),#guests.declined .guest-details{display:none}
 .form-error{font-size:12.5px;color:#b3261e;text-align:center;margin:0 0 .75rem}
 .rsvp-success{display:none;text-align:center;padding:2.5rem 1rem}
 .rsvp-success h3{font-family:'Great Vibes',cursive;font-size:2.5rem;color:var(--sage);margin-bottom:.5rem}
@@ -224,20 +226,16 @@ footer p{font-size:12px;color:var(--ink-s);line-height:1.9}
       <div class="prog-content"><h3>Symbolic Ceremony</h3><p>Under the canopy of century-old oak trees on the grounds</p></div>
     </div>
     <div class="prog-item reveal">
-      <div class="prog-time">4:30 PM</div>
-      <div class="prog-content"><h3>Photo Session</h3><p>A few pictures in the park with the newlyweds</p></div>
-    </div>
-    <div class="prog-item reveal">
-      <div class="prog-time">5:00 PM</div>
+      <div class="prog-time">4:00 PM</div>
       <div class="prog-content"><h3>Drinks Reception</h3><p>South terrace of the estate, by the water</p></div>
     </div>
     <div class="prog-item reveal">
-      <div class="prog-time">7:30 PM</div>
-      <div class="prog-content"><h3>First Dance</h3><p>The couple's first dance in the great barn</p></div>
+      <div class="prog-time">8:00 PM</div>
+      <div class="prog-content"><h3>Dinner & Cake</h3><p>Seated dinner and the wedding cake</p></div>
     </div>
     <div class="prog-item reveal">
-      <div class="prog-time">8:00 PM</div>
-      <div class="prog-content"><h3>Dinner & Party</h3><p>Seated dinner, live music and dancing</p></div>
+      <div class="prog-time">11:00 PM</div>
+      <div class="prog-content"><h3>Party</h3><p>Live music and dancing</p></div>
     </div>
   </div>
 
@@ -323,16 +321,11 @@ footer p{font-size:12px;color:var(--ink-s);line-height:1.9}
   <p class="sec-eyebrow">Confirm your attendance</p>
   <h2 class="sec-title reveal">RSVP</h2>
   <div class="sec-rule"></div>
-  <p style="font-size:13px;color:var(--ink-s);margin-bottom:1.5rem">Please reply by <strong style="color:var(--ink-m)">December 31, 2026</strong>. For any questions: <a href="/cdn-cgi/l/email-protection#d8b5b9aab1b9bfbd98a8b9adb4b1b6bdf5bdacf5bcb9b5b1bdb6f6beaa" style="color:var(--sage)"><span class="__cf_email__" data-cfemail="84e9e5f6ede5e3e1c4f4e5f1e8edeae1a9e1f0a9e0e5e9ede1eaaae2f6">[email&#160;protected]</span></a></p>
+  <p style="font-size:13px;color:var(--ink-s);margin-bottom:1.5rem">Please reply by <strong style="color:var(--ink-m)">July 20, 2027</strong>. For any questions: <a href="/cdn-cgi/l/email-protection#d8b5b9aab1b9bfbd98a8b9adb4b1b6bdf5bdacf5bcb9b5b1bdb6f6beaa" style="color:var(--sage)"><span class="__cf_email__" data-cfemail="84e9e5f6ede5e3e1c4f4e5f1e8edeae1a9e1f0a9e0e5e9ede1eaaae2f6">[email&#160;protected]</span></a></p>
   <div class="voyage-divider" aria-hidden="true"><img src="deco/feuilles-1.webp" alt=""></div>
   <div class="rsvp-wrap reveal" id="rsvpWrap">
    <img class="voyage-seal" src="deco/cire-vert.webp" alt="">
    <div class="voyage-paper">
-    <div class="form-grid" style="margin-bottom:0">
-      <div class="fg"><label>First name *</label><input type="text" id="prenom" placeholder="Jane"><span class="field-error" id="prenomError"></span></div>
-      <div class="fg"><label>Last name *</label><input type="text" id="nom" placeholder="Smith"></div>
-    </div>
-    <div class="fg"><label>Email *</label><input type="email" id="email" placeholder="jane@email.com"><span class="field-error" id="emailError"></span></div>
     <div class="form-grid" style="margin-bottom:0">
       <div class="fg">
         <label>Attending</label>
@@ -341,18 +334,16 @@ footer p{font-size:12px;color:var(--ink-s);line-height:1.9}
           <option value="non">I won't be able to attend</option>
         </select>
       </div>
-      <div class="fg">
+      <div class="fg" id="nbWrap">
         <label>Number of guests</label>
         <select id="nb" onchange="renderGuests()"><option>1</option><option>2</option><option>3</option><option>4</option></select>
       </div>
     </div>
-    <div id="guestsWrap">
-      <p class="guests-intro">For each guest: adult or child, dietary needs, and attendance at the town hall (October 19, 2027) and the brunch (October 21, 2027).</p>
-      <div id="guests"></div>
-      <div class="fg">
-        <label>A song you'd love to hear? (optional)</label>
-        <input type="text" id="musique" placeholder="Title and artist">
-      </div>
+    <p class="guests-intro" id="guestsIntro">One card per guest: name, adult or child, dietary needs, and attendance at the town hall (October 19, 2027) and the brunch (October 21, 2027).</p>
+    <div id="guests"></div>
+    <div class="fg" id="musicWrap">
+      <label>A song you'd love to hear? (optional)</label>
+      <input type="text" id="musique" placeholder="Title and artist">
     </div>
     <div class="fg">
       <label>A note for the couple (optional)</label>
@@ -386,17 +377,24 @@ function isValidEmail(email){
 }
 function guestHTML(i){
   const attend = id => `<select id="g${i}_${id}"><option value="">Choose…</option><option value="oui">Attending</option><option value="non">Not attending</option></select>`;
+  const first = i === 1;
   return `<div class="guest">
-    <p class="guest-title">Guest ${i}${i === 1 ? ' <span>(you)</span>' : ''}</p>
-    ${i === 1 ? '' : `<div class="fg"><label>First name</label><input type="text" id="g${i}_name" placeholder="Guest's first name"></div>`}
+    <p class="guest-title">Guest ${i}${first ? ' <span>(you · contact)</span>' : ''}</p>
     <div class="form-grid" style="margin-bottom:0">
-      <div class="fg"><label>Adult or child</label><select id="g${i}_type"><option value="adulte">Adult</option><option value="enfant">Child</option></select></div>
-      <div class="fg"><label>Vegetarian?</label><select id="g${i}_veg"><option value="non">No</option><option value="oui">Yes</option></select></div>
+      <div class="fg"><label>First name *</label><input type="text" id="${first ? 'prenom' : 'g'+i+'_prenom'}" placeholder="${first ? 'Jane' : 'First name'}">${first ? '<span class="field-error" id="prenomError"></span>' : ''}</div>
+      <div class="fg"><label>Last name${first ? ' *' : ''}</label><input type="text" id="${first ? 'nom' : 'g'+i+'_nom'}" placeholder="${first ? 'Smith' : 'Last name (if different)'}"></div>
     </div>
-    <div class="fg"><label>Allergies / dietary restrictions</label><input type="text" id="g${i}_diet" placeholder="None, or: gluten-free, lactose, peanuts…"></div>
-    <div class="form-grid" style="margin-bottom:0">
-      <div class="fg"><label>Town hall · October 19, 2027</label>${attend('mairie')}</div>
-      <div class="fg"><label>Brunch · October 21, 2027</label>${attend('brunch')}</div>
+    ${first ? '<div class="fg"><label>Email *</label><input type="email" id="email" placeholder="jane@email.com"><span class="field-error" id="emailError"></span></div>' : ''}
+    <div class="guest-details">
+      <div class="form-grid" style="margin-bottom:0">
+        <div class="fg"><label>Adult or child</label><select id="g${i}_type"><option value="adulte">Adult</option><option value="enfant">Child</option></select></div>
+        <div class="fg"><label>Vegetarian?</label><select id="g${i}_veg"><option value="non">No</option><option value="oui">Yes</option></select></div>
+      </div>
+      <div class="fg"><label>Allergies / dietary restrictions</label><input type="text" id="g${i}_diet" placeholder="None, or: gluten-free, lactose, peanuts…"></div>
+      <div class="form-grid" style="margin-bottom:0">
+        <div class="fg"><label>Town hall · October 19, 2027</label>${attend('mairie')}</div>
+        <div class="fg"><label>Brunch · October 21, 2027</label>${attend('brunch')}</div>
+      </div>
     </div>
   </div>`;
 }
@@ -408,10 +406,11 @@ function renderGuests(){
 }
 function toggleGuests(){
   const attending = document.getElementById('presence').value === 'oui';
-  document.getElementById('guestsWrap').style.display = attending ? 'block' : 'none';
+  ['nbWrap','guestsIntro','musicWrap'].forEach(id => { document.getElementById(id).style.display = attending ? '' : 'none'; });
+  document.getElementById('guests').classList.toggle('declined', !attending);
 }
 renderGuests();
-document.getElementById('guests').addEventListener('change', e => e.target.classList.remove('invalid'));
+['input','change'].forEach(ev => document.getElementById('guests').addEventListener(ev, e => e.target.classList.remove('invalid')));
 
 function clearRsvpErrors(){
   ['prenom','email'].forEach(id=>{
@@ -420,7 +419,7 @@ function clearRsvpErrors(){
     if(input) input.classList.remove('invalid');
     if(err) err.textContent = '';
   });
-  document.querySelectorAll('#guests select.invalid').forEach(s => s.classList.remove('invalid'));
+  document.querySelectorAll('#guests .invalid').forEach(s => s.classList.remove('invalid'));
   const formErr = document.getElementById('formError');
   if(formErr){ formErr.style.display = 'none'; formErr.textContent = ''; }
 }
@@ -464,13 +463,21 @@ async function submitRSVP(){
     const n = parseInt(get('nb'), 10) || 1;
     for(let i = 1; i <= n; i++){
       guests.push({
-        nom: i === 1 ? [prenom, nom].filter(Boolean).join(' ') : (get('g'+i+'_name') || 'Personne '+i),
+        prenom: i === 1 ? prenom : get('g'+i+'_prenom'),
+        nom: i === 1 ? nom : (get('g'+i+'_nom') || nom),
         type: get('g'+i+'_type'),
         vegetarien: get('g'+i+'_veg'),
         restrictions: get('g'+i+'_diet'),
         mairie: get('g'+i+'_mairie'),
         brunch: get('g'+i+'_brunch')
       });
+    }
+    const noName = guests.map((g, idx) => g.prenom ? null : document.getElementById('g'+(idx+1)+'_prenom')).filter(Boolean);
+    if(noName.length){
+      noName.forEach(inp => inp.classList.add('invalid'));
+      showFormError('Please enter the first name of each guest.');
+      noName[0].focus();
+      return;
     }
     const missing = [];
     guests.forEach((g, idx) => {
@@ -490,7 +497,7 @@ async function submitRSVP(){
     nb:       get('nb'),
     enfants:  children ? 'oui' : 'non',
     enfantsNb: String(children),
-    regime:   guests.map(g => `${g.nom} (${g.type}) : ${g.vegetarien === 'oui' ? 'végétarien' : 'non végétarien'}${g.restrictions ? ' ; ' + g.restrictions : ''} ; mairie 19/10 : ${g.mairie} ; brunch 21/10 : ${g.brunch}`).join(' | '),
+    regime:   guests.map(g => `${[g.prenom, g.nom].filter(Boolean).join(' ')} (${g.type}) : ${g.vegetarien === 'oui' ? 'végétarien' : 'non végétarien'}${g.restrictions ? ' ; ' + g.restrictions : ''} ; mairie 19/10 : ${g.mairie} ; brunch 21/10 : ${g.brunch}`).join(' | '),
     personnes: guests,
     musique:  attending ? get('musique') : '',
     mairie:   String(guests.filter(g => g.mairie === 'oui').length),

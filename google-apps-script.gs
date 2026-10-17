@@ -26,30 +26,34 @@
  *     Ouvrez infos.html et collez cette URL dans la ligne :
  *         const SHEET_ENDPOINT = "";   ←  entre les guillemets
  *
- *  C'est tout ! Chaque réponse RSVP arrivera comme une nouvelle ligne
- *  dans la feuille. (Astuce : si vous modifiez le script plus tard,
- *  refaites « Déployer ▸ Gérer les déploiements ▸ Modifier ▸ Nouvelle version ».)
+ *  C'est tout ! Chaque réponse RSVP arrive dans l'onglet « Réponses »,
+ *  avec UNE LIGNE PAR PERSONNE (un trait en haut sépare chaque réponse).
+ *  (Astuce : si vous modifiez le script plus tard, refaites
+ *  « Déployer ▸ Gérer les déploiements ▸ Modifier ▸ Nouvelle version ».)
  * ──────────────────────────────────────────────────────────────────────
  */
+
+var SHEET_NAME = 'Réponses';
+
+var HEADERS = ['Horodatage', 'Prénom', 'Nom', 'Email de contact', 'Présence',
+               'Nombre de personnes (réponse)', 'Personne n°', 'Adulte / Enfant',
+               'Végétarien', 'Allergies / restrictions', 'Mairie 19/10', 'Brunch 21/10',
+               'Musique', 'Message'];
 
 function doPost(e) {
   var lock = LockService.getScriptLock();
   lock.waitLock(30000);
 
   try {
-    var sheet = SpreadsheetApp.getActiveSpreadsheet().getSheets()[0];
+    var ss = SpreadsheetApp.getActiveSpreadsheet();
+    var sheet = ss.getSheetByName(SHEET_NAME) || ss.insertSheet(SHEET_NAME);
 
     // En-têtes (créés une seule fois, à la première réponse)
-    var headers = ['Horodatage', 'Prénom', 'Nom', 'Email', 'Présence',
-                   'Nombre de personnes', 'Enfants présents', 'Nombre d\'enfants',
-                   'Détail par personne (adulte/enfant, régime, mairie, brunch)', 'Message',
-                   'Musique', 'Présents mairie 19/10', 'Présents brunch 21/10'];
     if (sheet.getLastRow() === 0) {
-      sheet.appendRow(headers);
-    } else {
-      sheet.getRange(1, 1, 1, headers.length).setValues([headers]);
+      sheet.appendRow(HEADERS);
+      sheet.getRange(1, 1, 1, HEADERS.length).setFontWeight('bold');
+      sheet.setFrozenRows(1);
     }
-    sheet.getRange(1, 1, 1, headers.length).setFontWeight('bold');
 
     // Lecture des données (envoyées en JSON dans le corps de la requête)
     var data = {};
@@ -59,21 +63,41 @@ function doPost(e) {
       data = e.parameter || {};
     }
 
-    sheet.appendRow([
-      data.date     || new Date().toLocaleString('fr-FR'),
-      data.prenom   || '',
-      data.nom      || '',
-      data.email    || '',
-      data.presence || '',
-      data.nb       || '',
-      data.enfants  || '',
-      data.enfantsNb|| '',
-      data.regime   || '',
-      data.message  || '',
-      data.musique  || '',
-      data.mairie   || '',
-      data.brunch   || ''
-    ]);
+    var yesNo = function (v) { return v === 'oui' ? 'Oui' : (v === 'non' ? 'Non' : (v || '')); };
+    var kind  = function (v) { return v === 'adulte' ? 'Adulte' : (v === 'enfant' ? 'Enfant' : (v || '')); };
+
+    // Une entrée par personne. Sans détail (refus de venir, ou ancienne version
+    // du formulaire), on enregistre une seule ligne à partir des champs de base.
+    var people = (data.personnes && data.personnes.length)
+      ? data.personnes
+      : [{ prenom: data.prenom, nom: data.nom, restrictions: data.regime || '' }];
+
+    var attending = data.presence === 'oui';
+    var date = data.date || new Date().toLocaleString('fr-FR');
+
+    var rows = people.map(function (p, k) {
+      return [
+        date,
+        p.prenom || '',
+        p.nom || '',
+        data.email || '',
+        yesNo(data.presence),
+        attending ? (data.nb || people.length) : '',
+        attending ? k + 1 : '',
+        kind(p.type),
+        yesNo(p.vegetarien),
+        p.restrictions || '',
+        yesNo(p.mairie),
+        yesNo(p.brunch),
+        k === 0 ? (data.musique || '') : '',
+        k === 0 ? (data.message || '') : ''
+      ];
+    });
+
+    var start = sheet.getLastRow() + 1;
+    sheet.getRange(start, 1, rows.length, HEADERS.length).setValues(rows);
+    sheet.getRange(start, 1, 1, HEADERS.length)
+         .setBorder(true, null, null, null, null, null, '#b3892f', SpreadsheetApp.BorderStyle.SOLID);
 
     return ContentService
       .createTextOutput(JSON.stringify({ result: 'success' }))
@@ -92,6 +116,6 @@ function doPost(e) {
 // Permet de vérifier rapidement que le déploiement répond (ouvrez l'URL /exec dans le navigateur).
 function doGet() {
   return ContentService
-    .createTextOutput('RSVP endpoint actif ✓')
+    .createTextOutput('RSVP endpoint actif ✓ (v3 : une ligne par personne)')
     .setMimeType(ContentService.MimeType.TEXT);
 }
